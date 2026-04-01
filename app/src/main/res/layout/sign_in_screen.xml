@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <!-- Dark gradient overlay -->
+    <!-- Background image -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- 🔁 Logo image - replace app_logo with your logo image name -->
+        <!-- 🔁 Logo - replace app_logo with your logo image name -->
         <ImageView
             android:id="@+id/logoImage"
             android:layout_width="200dp"
@@ -41,62 +41,74 @@
             android:src="@drawable/app_logo" />
 
         <!-- Email field -->
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:boxBackgroundColor="#44FFFFFF"
-            app:boxCornerRadiusBottomEnd="25dp"
-            app:boxCornerRadiusBottomStart="25dp"
-            app:boxCornerRadiusTopEnd="25dp"
-            app:boxCornerRadiusTopStart="25dp"
-            app:boxStrokeColor="@android:color/transparent"
-            app:hintTextColor="#AAFFFFFF"
-            app:startIconDrawable="@drawable/ic_person"
-            app:startIconTint="#AAFFFFFF">
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/sign_in_screen"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="12dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <!-- 🔁 your email icon -->
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_person"
+                android:layout_marginEnd="12dp" />
+
+            <EditText
                 android:id="@+id/etEmail"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:paddingVertical="14dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#AAFFFFFF" />
+                android:textColorHint="#AAFFFFFF"
+                android:inputType="textEmailAddress"
+                android:background="@android:color/transparent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <!-- Password field -->
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:boxBackgroundColor="#44FFFFFF"
-            app:boxCornerRadiusBottomEnd="25dp"
-            app:boxCornerRadiusBottomStart="25dp"
-            app:boxCornerRadiusTopEnd="25dp"
-            app:boxCornerRadiusTopStart="25dp"
-            app:boxStrokeColor="@android:color/transparent"
-            app:hintTextColor="#AAFFFFFF"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="#AAFFFFFF"
-            app:startIconDrawable="@drawable/ic_lock"
-            app:startIconTint="#AAFFFFFF">
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/sign_in_screen"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="12dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <!-- 🔁 your lock icon -->
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_lock"
+                android:layout_marginEnd="12dp" />
+
+            <EditText
                 android:id="@+id/etPassword"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingVertical="14dp"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#AAFFFFFF" />
+                android:textColorHint="#AAFFFFFF"
+                android:inputType="textPassword"
+                android:background="@android:color/transparent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <ImageButton
+                android:id="@+id/btnTogglePassword"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@android:drawable/ic_menu_view"
+                android:background="@android:color/transparent"
+                android:layout_marginStart="8dp" />
+
+        </LinearLayout>
 
         <!-- Remember me + Forgot password -->
         <LinearLayout
