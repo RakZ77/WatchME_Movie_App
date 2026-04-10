@@ -8,6 +8,7 @@
 
     <!-- Background image -->
     <View
+        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/loading_screen"
@@ -20,15 +21,15 @@
     <LinearLayout
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="148dp"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingHorizontal="32dp"
         android:paddingBottom="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- 🔁 Logo - replace app_logo with your logo image name -->
         <ImageView
@@ -43,30 +44,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/sign_in_screen"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_marginBottom="12dp">
+            android:paddingEnd="16dp">
 
             <!-- 🔁 Replace ic_person with your username icon name -->
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/ic_person"
-                android:layout_marginEnd="12dp" />
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_person" />
 
             <EditText
                 android:id="@+id/etUsername"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@android:color/transparent"
                 android:hint="Username"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#AAFFFFFF"
                 android:inputType="textPersonName"
-                android:background="@android:color/transparent" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAFFFFFF" />
 
         </LinearLayout>
 
@@ -74,30 +75,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/sign_in_screen"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_marginBottom="12dp">
+            android:paddingEnd="16dp">
 
             <!-- 🔁 Replace ic_email with your email icon name -->
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/ic_person"
-                android:layout_marginEnd="12dp" />
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_person" />
 
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@android:color/transparent"
                 android:hint="Email"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#AAFFFFFF"
                 android:inputType="textEmailAddress"
-                android:background="@android:color/transparent" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAFFFFFF" />
 
         </LinearLayout>
 
@@ -105,39 +106,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/sign_in_screen"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_marginBottom="24dp">
+            android:paddingEnd="16dp">
 
             <!-- 🔁 Replace ic_lock with your lock icon name -->
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/ic_lock"
-                android:layout_marginEnd="12dp" />
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_lock" />
 
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@android:color/transparent"
                 android:hint="Password"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#AAFFFFFF"
                 android:inputType="textPassword"
-                android:background="@android:color/transparent" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAFFFFFF" />
 
             <!-- Show/Hide password toggle -->
             <ImageButton
                 android:id="@+id/btnTogglePassword"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@android:drawable/ic_menu_view"
+                android:layout_marginStart="8dp"
                 android:background="@android:color/transparent"
-                android:layout_marginStart="8dp" />
+                android:src="@android:drawable/ic_menu_view" />
 
         </LinearLayout>
 
@@ -181,54 +182,6 @@
                 android:textColor="#E50914"
                 android:textSize="13sp"
                 android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <!-- Or text -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Or"
-            android:textColor="#CCFFFFFF"
-            android:textSize="13sp" />
-
-        <!-- Social media icons -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <!-- 🔁 Replace ic_facebook with your Facebook image name -->
-            <ImageButton
-                android:id="@+id/btnFacebook"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginHorizontal="12dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_facebook" />
-
-            <!-- 🔁 Replace ic_google with your Google image name -->
-            <ImageButton
-                android:id="@+id/btnGoogle"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginHorizontal="12dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_google" />
-
-            <!-- 🔁 Replace ic_twitter with your X/Twitter image name -->
-            <ImageButton
-                android:id="@+id/btnTwitter"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginHorizontal="12dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_twitter" />
 
         </LinearLayout>
 
