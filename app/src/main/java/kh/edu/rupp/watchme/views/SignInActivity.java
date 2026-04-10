@@ -31,7 +31,6 @@ public class SignInActivity extends AppCompatActivity {
 
         signUp.setOnClickListener(v -> {
             startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
-            finish();
         });
 
         btnSignIn.setOnClickListener(v -> {
