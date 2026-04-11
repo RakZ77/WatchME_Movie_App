@@ -5,22 +5,34 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
 
 import kh.edu.rupp.watchme.R;
+import kh.edu.rupp.watchme.repositories.AuthRepository;
+import kh.edu.rupp.watchme.utils.SessionManager;
+import kh.edu.rupp.watchme.viewmodels.AuthViewModel;
 
 public class WelcomeActivity extends AppCompatActivity {
     MaterialButton getStartedBtn;
+    AuthViewModel viewModel;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
+        viewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
         getStartedBtn = findViewById(R.id.btnGetStarted);
+
         getStartedBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, FirstActivity.class));
-            finish();
+            if(viewModel.isSignedIn()){
+                startActivity(new Intent(this, HomeActivity.class));
+                finish();
+            }else {
+                startActivity(new Intent(this, SignInActivity.class));
+                finish();
+            }
         });
 
     }

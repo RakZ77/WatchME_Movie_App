@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 
 public interface SupabaseService {
     @POST("auth/v1/token?grant_type=password")
-    Call<AuthResponse> login(@Body SignInRequest request);
+    Call<AuthResponse> signIn(@Body SignInRequest request);
 
     @POST("auth/v1/recover")
     Call<Void> forgotPassword(@Body ForgotRequest request);
