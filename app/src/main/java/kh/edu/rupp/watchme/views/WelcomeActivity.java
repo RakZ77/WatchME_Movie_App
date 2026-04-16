@@ -10,8 +10,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.button.MaterialButton;
 
 import kh.edu.rupp.watchme.R;
-import kh.edu.rupp.watchme.repositories.AuthRepository;
-import kh.edu.rupp.watchme.utils.SessionManager;
 import kh.edu.rupp.watchme.viewmodels.AuthViewModel;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -27,7 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         getStartedBtn.setOnClickListener(v -> {
             if(viewModel.isSignedIn()){
-                startActivity(new Intent(this, HomeActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
                 finish();
             }else {
                 startActivity(new Intent(this, SignInActivity.class));

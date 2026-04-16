@@ -4,22 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#242933"
-    tools:context=".views.HomeActivity">
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:background="@drawable/bottom_nav_bg"
-        app:itemIconTint="@drawable/bottom_nav_colors"
-        app:itemTextColor="@drawable/bottom_nav_colors"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+    android:background="#242933">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -27,7 +12,7 @@
         android:clipToPadding="false"
         android:fillViewport="true"
         android:paddingBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
