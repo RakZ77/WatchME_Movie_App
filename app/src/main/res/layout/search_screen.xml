@@ -16,7 +16,6 @@
         app:itemTextColor="@drawable/bottom_nav_colors"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
-        app:selectedItemId="@id/nav_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -58,12 +57,11 @@
                 android:paddingEnd="14dp">
 
                 <EditText
-                    android:layout_width="334dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:hint="Search"
-                    android:hintTextColor="#8C93A0"
                     android:inputType="text"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#8C93A0"
