@@ -1,12 +1,16 @@
 package kh.edu.rupp.watchme.viewmodels;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.List;
+
 import kh.edu.rupp.watchme.models.AuthResponse;
+import kh.edu.rupp.watchme.models.Profiles;
 import kh.edu.rupp.watchme.repositories.AuthRepository;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,6 +21,8 @@ public class AuthViewModel extends AndroidViewModel {
     private MutableLiveData<AuthResponse> signInResult = new MutableLiveData<>();
     private MutableLiveData<AuthResponse> signUpResult =  new MutableLiveData<>();
     private MutableLiveData<Boolean> forgotResult = new MutableLiveData<>();
+    private MutableLiveData<Boolean> updatePasswordResult = new MutableLiveData<>();
+    private MutableLiveData<Profiles> userProfile = new MutableLiveData<>();
 
     public AuthViewModel (Application application) {
         super(application);
@@ -30,7 +36,7 @@ public class AuthViewModel extends AndroidViewModel {
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                 if(response.isSuccessful() && response.body() != null){
                     AuthResponse auth = response.body();
-                    repo.saveSession(auth.getAccess_token(), auth.getRefresh_token());
+                    repo.saveSession(auth.getAccess_token(), auth.getRefresh_token(), auth.getUser().getId());
                     signInResult.postValue(auth);
                 }else {
                     signInResult.postValue(null);
@@ -57,7 +63,7 @@ public class AuthViewModel extends AndroidViewModel {
                 } else {
                     try {
                         String error = response.errorBody().string();
-                        android.util.Log.e("SIGNUP_ERROR", error); // 🔥 ADD THIS
+                        android.util.Log.e("SIGNUP_ERROR", error);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -94,9 +100,52 @@ public class AuthViewModel extends AndroidViewModel {
         return forgotResult;
     }
 
+    // Reset Password
+    public void updatePassword(String token, String newPassword){
+        repo.updatePassword(token, newPassword, new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                updatePasswordResult.postValue(response.isSuccessful());
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t){
+                updatePasswordResult.postValue(false);
+            }
+        });
+    }
+    public LiveData<Boolean> getUpdatePasswordResult() {
+        return updatePasswordResult;
+    }
+
+    // Get user profile
+    public void getUserProfile(String userId, String token){
+        repo.getUserProfile(userId, token, new Callback<List<Profiles>>() {
+            @Override
+            public void onResponse(Call<List<Profiles>> call, Response<List<Profiles>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    userProfile.postValue(response.body().get(0));
+                }else {
+                    userProfile.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Profiles>> call, Throwable t) {
+                Log.e("PROFILE", t.getMessage());
+                userProfile.postValue(null);
+            }
+        });
+
+    }
+
+    public LiveData<Profiles> getUserProfileLiveData() {
+        return userProfile;
+    }
+
     // Session
-    public void saveSession(String accessToken, String refreshToken){
-        repo.saveSession(accessToken, refreshToken);
+    public void saveSession(String accessToken, String refreshToken, String userId){
+        repo.saveSession(accessToken, refreshToken, userId);
     }
     public void logout(){
         repo.logout();
