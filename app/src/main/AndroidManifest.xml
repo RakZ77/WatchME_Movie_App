@@ -24,6 +24,6 @@
         <activity android:name=".views.SignInActivity"/>
         <activity android:name=".views.ForgotPasswordActivity"/>
         <activity android:name=".views.SignUpActivity"/>
-        <activity android:name=".views.HomeActivity"/>
+        <activity android:name=".views.MainActivity"/>
     </application>
 </manifest>

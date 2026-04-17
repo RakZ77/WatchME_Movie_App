@@ -51,7 +51,6 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <!-- 🔁 Replace ic_person with your username icon name -->
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -61,7 +60,7 @@
             <EditText
                 android:id="@+id/etUsername"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="Username"
@@ -70,6 +69,17 @@
                 android:textColorHint="#AAFFFFFF" />
 
         </LinearLayout>
+
+        <!-- Username error -->
+        <TextView
+            android:id="@+id/tvUsernameError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#E50914"
+            android:textSize="12sp"
+            android:visibility="gone" />
 
         <!-- Email field -->
         <LinearLayout
@@ -82,7 +92,6 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <!-- 🔁 Replace ic_email with your email icon name -->
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -92,7 +101,7 @@
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="Email"
@@ -101,6 +110,17 @@
                 android:textColorHint="#AAFFFFFF" />
 
         </LinearLayout>
+
+        <!-- Email error -->
+        <TextView
+            android:id="@+id/tvEmailError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#E50914"
+            android:textSize="12sp"
+            android:visibility="gone" />
 
         <!-- Password field -->
         <LinearLayout
@@ -113,7 +133,6 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <!-- 🔁 Replace ic_lock with your lock icon name -->
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -123,7 +142,7 @@
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="Password"
@@ -141,6 +160,17 @@
                 android:src="@android:drawable/ic_menu_view" />
 
         </LinearLayout>
+
+        <!-- Password error -->
+        <TextView
+            android:id="@+id/tvPasswordError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#E50914"
+            android:textSize="12sp"
+            android:visibility="gone" />
 
         <!-- SIGN UP Button -->
         <com.google.android.material.button.MaterialButton

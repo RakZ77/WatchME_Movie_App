@@ -55,6 +55,12 @@ public class AuthViewModel extends AndroidViewModel {
                 if (response.isSuccessful()) {
                     signUpResult.postValue(response.body());
                 } else {
+                    try {
+                        String error = response.errorBody().string();
+                        android.util.Log.e("SIGNUP_ERROR", error); // 🔥 ADD THIS
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     signUpResult.postValue(null);
                 }
 

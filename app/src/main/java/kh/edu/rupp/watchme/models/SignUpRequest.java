@@ -1,14 +1,19 @@
 package kh.edu.rupp.watchme.models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SignUpRequest {
-    private String userName;
+    private Map<String, String> data;
     private String email;
     private String password;
 
     public SignUpRequest(String userName, String email, String password) {
-        this.userName = userName;
         this.email = email;
         this.password = password;
+
+        data = new HashMap<>();
+        data.put("username", userName);
     }
 
     public String getEmail() {
@@ -19,9 +24,7 @@ public class SignUpRequest {
         return password;
     }
 
-    public String getUserName(){
-        return userName;
-    }
+    public Map<String, String> getData() { return data; }
 
 
 }
