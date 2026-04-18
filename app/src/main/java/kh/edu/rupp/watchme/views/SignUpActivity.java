@@ -78,7 +78,8 @@ public class SignUpActivity extends AppCompatActivity {
             if (response != null) {
                 viewModel.saveSession(
                         response.getAccess_token(),
-                        response.getRefresh_token()
+                        response.getRefresh_token(),
+                        response.getUser().getId()
                 );
 
                 startActivity(new Intent(this, MainActivity.class));

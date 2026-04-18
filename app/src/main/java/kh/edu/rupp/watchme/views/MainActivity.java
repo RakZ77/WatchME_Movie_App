@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new HomeFragment();
             } else if (item.getItemId() == R.id.nav_search) {
                 fragment = new SearchFragment();
+            } else if (item.getItemId() == R.id.nav_watchlist) {
+                fragment = new WatchListFragment();
+            } else if (item.getItemId() == R.id.nav_profile) {
+                fragment = new ProfileFragment();
             } else {
                 return false;
             }

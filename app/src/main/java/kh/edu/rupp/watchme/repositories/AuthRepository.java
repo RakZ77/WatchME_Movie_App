@@ -3,8 +3,13 @@ package kh.edu.rupp.watchme.repositories;
 import android.app.Application;
 import android.content.Context;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import kh.edu.rupp.watchme.models.AuthResponse;
 import kh.edu.rupp.watchme.models.ForgotRequest;
+import kh.edu.rupp.watchme.models.Profiles;
 import kh.edu.rupp.watchme.models.SignInRequest;
 import kh.edu.rupp.watchme.models.SignUpRequest;
 import kh.edu.rupp.watchme.network.RetrofitClient;
@@ -30,8 +35,21 @@ public class AuthRepository {
     public void forgotPassword(String email, Callback<Void> callback){
         api.forgotPassword(new ForgotRequest(email)).enqueue(callback);
     }
-    public void saveSession(String accessToken, String refreshToken){
-        session.saveSession(accessToken, refreshToken);
+
+    public void updatePassword(String token, String password, Callback<Void> callback) {
+        Map<String, String> body = new HashMap<>();
+        body.put("password", password);
+
+        String bearer = "Bearer " + token;
+        api.updatePassword(bearer, body).enqueue(callback);
+    }
+
+    public void getUserProfile(String userId, String token, Callback<List<Profiles>> callback){
+        api.getProfiles("Bearer " + token, "id,username,avatar_url", "eq." + userId).enqueue(callback);
+    }
+
+    public void saveSession(String accessToken, String refreshToken, String userId){
+        session.saveSession(accessToken, refreshToken, userId);
     }
     public void logout(){
         session.logout();
