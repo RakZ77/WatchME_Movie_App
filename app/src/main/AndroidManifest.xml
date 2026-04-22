@@ -36,5 +36,11 @@
         <activity android:name=".views.ForgotPasswordActivity"/>
         <activity android:name=".views.SignUpActivity"/>
         <activity android:name=".views.MainActivity"/>
+        <activity android:name=".views.SettingActivity"/>
+        <activity android:name=".views.AboutActivity"/>
+        <activity android:name=".views.HelpActivity"/>
+        <activity android:name=".views.MembershipActivity"/>
+        <activity android:name=".views.NotificationActivity"/>
+        <activity android:name=".views.FeedbackActivity"/>
     </application>
 </manifest>

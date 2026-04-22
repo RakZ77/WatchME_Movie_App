@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,8 @@ public class ProfileFragment extends Fragment {
     private SessionManager sessionManager;
     private MaterialButton btnLogout;
     private ShapeableImageView imgProfile;
+    private LinearLayout settingAct, membershipAct, notificationAct, helpAct, aboutAct, feedbackAct;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,10 +39,15 @@ public class ProfileFragment extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
         imgProfile = view.findViewById(R.id.imgProfile);
 
+        settingAct = view.findViewById(R.id.itemSettings);
+        membershipAct = view.findViewById(R.id.itemMembership);
+        notificationAct = view.findViewById(R.id.itemNotification);
+        helpAct = view.findViewById(R.id.itemHelpCenter);
+        aboutAct = view.findViewById(R.id.itemAbout);
+        feedbackAct = view.findViewById(R.id.itemFeedback);
 
         sessionManager = new SessionManager(requireContext());
         viewModel = new ViewModelProvider(this).get(AuthViewModel.class);
-
 
         String userId = sessionManager.getUserId();
         String token = sessionManager.getAcessToken();
@@ -70,6 +78,25 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(requireActivity(), SignInActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+        });
+
+        settingAct.setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), SettingActivity.class));
+        });
+        aboutAct.setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), AboutActivity.class));
+        });
+        membershipAct.setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), MembershipActivity.class));
+        });
+        notificationAct.setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), NotificationActivity.class));
+        });
+        feedbackAct.setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), FeedbackActivity.class));
+        });
+        helpAct.setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), HelpActivity.class));
         });
 
         return view;
