@@ -131,10 +131,8 @@ public class EditProfileActivity extends AppCompatActivity {
         // Observe avatar upload result ONCE here
         profileViewModel.getAvatarUploadResult().observe(this, uploadResult -> {
             if ("success".equals(uploadResult)) {
-                String newUrl = profileViewModel.getUserProfileLiveData().getValue() != null
-                        ? profileViewModel.getUserProfileLiveData().getValue().getAvatar_url()
-                        : avatarUrl;
-                avatarUrl = newUrl; // update local avatarUrl
+                String uploadedUrl = profileViewModel.getPendingAvatarUrl();
+                avatarUrl = uploadedUrl != null ? uploadedUrl : avatarUrl;
 
                 // Now save the full profile with the new avatar URL
                 saveProfile(

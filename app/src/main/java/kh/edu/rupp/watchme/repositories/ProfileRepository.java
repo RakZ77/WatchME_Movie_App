@@ -89,45 +89,60 @@ public class ProfileRepository {
 
     }
 
-    public void uploadAndUpdateAvatar(String userId, Uri imageUri, Context context, Callback<Void> callback) {
+    public interface OnAvatarUploaded {
+        void onSuccess(String publicUrl);
+        void onFailure();
+    }
+
+    public void uploadAndUpdateAvatar(String userId, Uri imageUri, Context context, OnAvatarUploaded callback) {
         try {
-            // Read image bytes from Uri
             InputStream inputStream = context.getContentResolver().openInputStream(imageUri);
             byte[] imageBytes = readBytes(inputStream);
 
             String contentType = context.getContentResolver().getType(imageUri);
             if (contentType == null) contentType = "image/jpeg";
 
-            RequestBody requestBody = RequestBody.create(
-                    MediaType.parse(contentType), imageBytes);
+            RequestBody requestBody = RequestBody.create(MediaType.parse(contentType), imageBytes);
 
-            // Use userId as filename so it overwrites the old one each time
             String fileName = userId + "_" + System.currentTimeMillis() + ".jpg";
+            String publicUrl = "https://scnjqgmuxdkkicbvvuiz.supabase.co"
+                    + "/storage/v1/object/public/avatars/" + fileName;
 
             api.uploadAvatar(contentType, fileName, requestBody).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        // Build the public URL and save to profiles table
-                        String publicUrl = "https://scnjqgmuxdkkicbvvuiz.supabase.co"
-                                + "/storage/v1/object/public/avatars/" + fileName;
-                        updateAvatarUrl(userId, publicUrl, callback);
+                        updateAvatarUrl(userId, publicUrl, new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> c, Response<Void> r) {
+                                if (r.isSuccessful()) {
+                                    callback.onSuccess(publicUrl); // ✅ now compiles
+                                } else {
+                                    callback.onFailure(); // ✅ now compiles
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<Void> c, Throwable t) {
+                                callback.onFailure(); // ✅ now compiles
+                            }
+                        });
                     } else {
                         try {
                             Log.e("AVATAR_UPLOAD", response.errorBody().string());
                         } catch (Exception e) { e.printStackTrace(); }
-                        callback.onResponse(call, response);
+                        callback.onFailure(); // ✅ now compiles
                     }
                 }
+
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
                     Log.e("AVATAR_UPLOAD", t.getMessage());
-                    callback.onFailure(call, t);
-                        }
+                    callback.onFailure(); // ✅ now compiles
+                }
             });
         } catch (Exception e) {
             e.printStackTrace();
-            callback.onFailure(null, e);
+            callback.onFailure(); // ✅ now compiles
         }
     }
 

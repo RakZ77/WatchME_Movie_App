@@ -23,6 +23,7 @@ public class ProfileViewModel extends AndroidViewModel {
     private MutableLiveData<Profiles> userProfile = new MutableLiveData<>();
     private MutableLiveData<Boolean> updateResult = new MutableLiveData<>();
     private MutableLiveData<String> avatarUploadResult = new MutableLiveData<>();
+    private String pendingAvatarUrl = null;
 
     public ProfileViewModel (Application application) {
         super(application);
@@ -83,23 +84,19 @@ public class ProfileViewModel extends AndroidViewModel {
     public LiveData<Boolean> getUpdateResult() { return updateResult; }
 
     public void uploadAvatar(String userId, Uri imageUri, Context context) {
-        repo.uploadAndUpdateAvatar(userId, imageUri, context, new Callback<Void>() {
+        repo.uploadAndUpdateAvatar(userId, imageUri, context, new ProfileRepository.OnAvatarUploaded() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    // Reload profile so avatar_url LiveData updates
-                    getUserProfile(userId);
-                    avatarUploadResult.postValue("success");
-                } else {
-                    avatarUploadResult.postValue("failed");
-                }
+            public void onSuccess(String publicUrl) {
+                pendingAvatarUrl = publicUrl;
+                avatarUploadResult.postValue("success");
             }
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure() {
                 avatarUploadResult.postValue("failed");
             }
         });
     }
+    public String getPendingAvatarUrl() { return pendingAvatarUrl; }
 
     public LiveData<String> getAvatarUploadResult() { return avatarUploadResult; }
 }
