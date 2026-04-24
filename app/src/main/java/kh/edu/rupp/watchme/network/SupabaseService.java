@@ -8,11 +8,13 @@ import kh.edu.rupp.watchme.models.ForgotRequest;
 import kh.edu.rupp.watchme.models.Profiles;
 import kh.edu.rupp.watchme.models.SignInRequest;
 import kh.edu.rupp.watchme.models.SignUpRequest;
+import kh.edu.rupp.watchme.models.UpdateProfileRequest;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -36,17 +38,24 @@ public interface SupabaseService {
 
     @GET("rest/v1/profiles")
     Call<List<Profiles>> getProfiles(
-            @Header("Authorization") String token,
             @Query("select") String select,
             @Query("id") String userId
     );
 
-    @PUT("storage/v1/object/avatars/{userId}")
+    @POST("auth/v1/token?grant_type=refresh_token")
+    Call<AuthResponse> refreshToken(@Body Map<String, String> body);
+
+    @PATCH("rest/v1/profiles")
+    Call<Void> updateProfile(
+            @Header("Prefer") String prefer,
+            @Query("id") String userId,
+            @Body UpdateProfileRequest body
+    );
+
+    @PUT ("storage/v1/object/avatars/{filename}")
     Call<Void> uploadAvatar(
-            @Header("Authorization") String token,
-            @Header("apikey") String apiKey,
             @Header("Content-Type") String contentType,
-            @Path("userId") String userId,
+            @Path("filename") String filename,
             @Body RequestBody image
     );
 }

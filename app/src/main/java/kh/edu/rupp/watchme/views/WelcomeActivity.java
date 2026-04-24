@@ -18,7 +18,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_screen);
+        setContentView(R.layout.activity_welcome);
         viewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
         getStartedBtn = findViewById(R.id.btnGetStarted);

@@ -44,10 +44,6 @@ public class AuthRepository {
         api.updatePassword(bearer, body).enqueue(callback);
     }
 
-    public void getUserProfile(String userId, String token, Callback<List<Profiles>> callback){
-        api.getProfiles("Bearer " + token, "id,username,avatar_url", "eq." + userId).enqueue(callback);
-    }
-
     public void saveSession(String accessToken, String refreshToken, String userId){
         session.saveSession(accessToken, refreshToken, userId);
     }
@@ -55,7 +51,14 @@ public class AuthRepository {
         session.logout();
     }
     public boolean isSignedIn(){
-        return session.getAcessToken() != null;
+        return session.getAccessToken() != null;
+    }
+
+    public void refreshToken(Callback<AuthResponse> callback) {
+        String refreshToken = session.getRefreshToken();
+        Map<String, String> body = new HashMap<>();
+        body.put("refresh_token", refreshToken);
+        api.refreshToken(body).enqueue(callback);
     }
 
 }

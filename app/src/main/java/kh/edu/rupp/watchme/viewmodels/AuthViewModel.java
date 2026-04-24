@@ -22,7 +22,6 @@ public class AuthViewModel extends AndroidViewModel {
     private MutableLiveData<AuthResponse> signUpResult =  new MutableLiveData<>();
     private MutableLiveData<Boolean> forgotResult = new MutableLiveData<>();
     private MutableLiveData<Boolean> updatePasswordResult = new MutableLiveData<>();
-    private MutableLiveData<Profiles> userProfile = new MutableLiveData<>();
 
     public AuthViewModel (Application application) {
         super(application);
@@ -116,31 +115,6 @@ public class AuthViewModel extends AndroidViewModel {
     }
     public LiveData<Boolean> getUpdatePasswordResult() {
         return updatePasswordResult;
-    }
-
-    // Get user profile
-    public void getUserProfile(String userId, String token){
-        repo.getUserProfile(userId, token, new Callback<List<Profiles>>() {
-            @Override
-            public void onResponse(Call<List<Profiles>> call, Response<List<Profiles>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    userProfile.postValue(response.body().get(0));
-                }else {
-                    userProfile.postValue(null);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Profiles>> call, Throwable t) {
-                Log.e("PROFILE", t.getMessage());
-                userProfile.postValue(null);
-            }
-        });
-
-    }
-
-    public LiveData<Profiles> getUserProfileLiveData() {
-        return userProfile;
     }
 
     // Session

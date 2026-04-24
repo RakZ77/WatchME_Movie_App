@@ -10,12 +10,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import kh.edu.rupp.watchme.R;
+import kh.edu.rupp.watchme.network.RetrofitClient;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RetrofitClient.init(this);
 
         if (savedInstanceState == null){
             getSupportFragmentManager()

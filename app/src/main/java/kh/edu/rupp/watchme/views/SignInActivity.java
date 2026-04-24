@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.button.MaterialButton;
 
 import kh.edu.rupp.watchme.R;
+import kh.edu.rupp.watchme.utils.SessionManager;
 import kh.edu.rupp.watchme.utils.SimpleTextWatcher;
 import kh.edu.rupp.watchme.viewmodels.AuthViewModel;
 
@@ -25,12 +26,13 @@ public class SignInActivity extends AppCompatActivity {
     private MaterialButton btnSignIn;
     private ImageButton btnTogglePassword;
     private AuthViewModel viewModel;
+    private SessionManager session;
     private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_in_screen);
+        setContentView(R.layout.activity_sign_in);
 
         tvEmailError = findViewById(R.id.tvEmailError);
         tvPasswordError = findViewById(R.id.tvPasswordError);
@@ -42,6 +44,7 @@ public class SignInActivity extends AppCompatActivity {
         btnTogglePassword = findViewById(R.id.btnTogglePassword);
 
         viewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+        session = new SessionManager(this);
 
         // Clear errors as user types
         etEmail.addTextChangedListener(new SimpleTextWatcher(() -> hideError(tvEmailError)));
@@ -80,6 +83,8 @@ public class SignInActivity extends AppCompatActivity {
                     response.getRefresh_token(),
                     response.getUser().getId()
                 );
+
+                session.saveEmail(response.getUser().getEmail());
 
                 startActivity(new Intent(this, MainActivity.class));
                 finish();

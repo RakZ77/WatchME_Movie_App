@@ -31,7 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_up_screen);
+        setContentView(R.layout.activity_sign_up);
 
         tvUsernameError = findViewById(R.id.tvUsernameError);
         tvEmailError = findViewById(R.id.tvEmailError);

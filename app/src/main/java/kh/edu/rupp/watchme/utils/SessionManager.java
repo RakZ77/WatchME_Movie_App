@@ -16,7 +16,7 @@ public class SessionManager {
                 .apply();
     }
 
-    public String getAcessToken(){
+    public String getAccessToken(){
         return prefs.getString("access_token", null);
     }
 
@@ -31,5 +31,14 @@ public class SessionManager {
     public void logout(){
         prefs.edit().clear().apply();
     }
+
+    public void saveEmail(String email){
+        prefs.edit().putString("email", email).apply();
+    }
+
+    public String getEmail(){
+        return prefs.getString("email", null);
+    }
+
 
 }

@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.ContentLoadingProgressBar;
 
 import kh.edu.rupp.watchme.R;
 
@@ -17,7 +16,7 @@ public class LoadingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loading_screen);
+        setContentView(R.layout.activity_loading);
 
         ImageView    loadingBar = findViewById(R.id.loadingBar);
         Animation rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);

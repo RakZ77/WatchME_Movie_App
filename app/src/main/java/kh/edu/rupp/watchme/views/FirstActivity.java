@@ -15,7 +15,7 @@ public class FirstActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.first_screen);
+        setContentView(R.layout.activity_first);
 
         signInBtn = findViewById(R.id.btnSignIn);
         signUpBtn = findViewById(R.id.btnSignUp);

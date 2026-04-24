@@ -16,14 +16,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import kh.edu.rupp.watchme.R;
 import kh.edu.rupp.watchme.utils.SessionManager;
 import kh.edu.rupp.watchme.viewmodels.AuthViewModel;
+import kh.edu.rupp.watchme.viewmodels.ProfileViewModel;
 
 public class ProfileFragment extends Fragment {
-    private AuthViewModel viewModel;
+    private AuthViewModel authViewModel;
+    private ProfileViewModel profileViewModel;
     private TextView tvName;
     private SessionManager sessionManager;
     private MaterialButton btnLogout;
@@ -47,13 +51,14 @@ public class ProfileFragment extends Fragment {
         feedbackAct = view.findViewById(R.id.itemFeedback);
 
         sessionManager = new SessionManager(requireContext());
-        viewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+
 
         String userId = sessionManager.getUserId();
-        String token = sessionManager.getAcessToken();
-        viewModel.getUserProfile(userId, token);
+        profileViewModel.getUserProfile(userId);
 
-        viewModel.getUserProfileLiveData().observe(getViewLifecycleOwner(), profile -> {
+        profileViewModel.getUserProfileLiveData().observe(getViewLifecycleOwner(), profile -> {
             if (profile != null) {
                 tvName.setText(profile.getUsername());
 
@@ -61,6 +66,8 @@ public class ProfileFragment extends Fragment {
                 if (url != null && !url.isEmpty()) {
                     Picasso.get()
                             .load(url)
+                            .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                            .networkPolicy(NetworkPolicy.NO_CACHE)
                             .placeholder(R.drawable.cat_profile)
                             .error(R.drawable.cat_profile)
                             .into(imgProfile);
@@ -73,7 +80,7 @@ public class ProfileFragment extends Fragment {
         });
 
         btnLogout.setOnClickListener(v -> {
-            viewModel.logout();
+            authViewModel.logout();
 
             Intent intent = new Intent(requireActivity(), SignInActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -100,5 +107,13 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String userId = sessionManager.getUserId();
+        String token = sessionManager.getAccessToken();
+        profileViewModel.getUserProfile(userId);
     }
 }
