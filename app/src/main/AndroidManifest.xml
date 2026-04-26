@@ -43,5 +43,6 @@
         <activity android:name=".views.NotificationActivity"/>
         <activity android:name=".views.FeedbackActivity"/>
         <activity android:name=".views.EditProfileActivity"/>
+        <activity android:name=".views.DetailsAboutMovieActivity"/>
     </application>
 </manifest>

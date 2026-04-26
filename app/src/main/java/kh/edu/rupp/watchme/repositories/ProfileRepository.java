@@ -116,33 +116,33 @@ public class ProfileRepository {
                             @Override
                             public void onResponse(Call<Void> c, Response<Void> r) {
                                 if (r.isSuccessful()) {
-                                    callback.onSuccess(publicUrl); // ✅ now compiles
+                                    callback.onSuccess(publicUrl);
                                 } else {
-                                    callback.onFailure(); // ✅ now compiles
+                                    callback.onFailure();
                                 }
                             }
                             @Override
                             public void onFailure(Call<Void> c, Throwable t) {
-                                callback.onFailure(); // ✅ now compiles
+                                callback.onFailure();
                             }
                         });
                     } else {
                         try {
                             Log.e("AVATAR_UPLOAD", response.errorBody().string());
                         } catch (Exception e) { e.printStackTrace(); }
-                        callback.onFailure(); // ✅ now compiles
+                        callback.onFailure();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
                     Log.e("AVATAR_UPLOAD", t.getMessage());
-                    callback.onFailure(); // ✅ now compiles
+                    callback.onFailure();
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
-            callback.onFailure(); // ✅ now compiles
+            callback.onFailure();
         }
     }
 

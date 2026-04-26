@@ -14,7 +14,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static final String BASE_URL = "https://scnjqgmuxdkkicbvvuiz.supabase.co/";
+    private static final String TMDB_BASE_URL = "https://api.themoviedb.org/3/";
+
     private static Retrofit retrofit;
+    private static Retrofit tmdbRetrofit;
     private static SessionManager sessionManager;
 
     public static void init(Context context){
@@ -54,5 +57,19 @@ public class RetrofitClient {
     }
     public static SupabaseService getSupabaseService(){
         return getClient().create(SupabaseService.class);
+    }
+
+    public static Retrofit getTMDbClient() {
+        if (tmdbRetrofit == null) {
+            tmdbRetrofit = new Retrofit.Builder()
+                    .baseUrl(TMDB_BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return tmdbRetrofit;
+    }
+
+    public static TMDbService getTMDbService() {
+        return getTMDbClient().create(TMDbService.class);
     }
 }

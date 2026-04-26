@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#242933">
@@ -12,17 +11,17 @@
         android:clipToPadding="false"
         android:fillViewport="true"
         android:paddingBottom="20dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingStart="16dp"
-            android:paddingTop="?actionBarSize"
+            android:paddingTop="?attr/actionBarSize"
             android:paddingEnd="16dp">
 
             <ImageView
@@ -31,120 +30,19 @@
                 android:layout_height="44dp"
                 android:layout_marginStart="18dp"
                 android:adjustViewBounds="true"
-                android:background="@null"
                 android:scaleType="fitCenter"
-                android:src="@drawable/app_logo"
-                tools:ignore="ContentDescription" />
+                android:src="@drawable/app_logo" />
 
-            <HorizontalScrollView
+            <!-- FEATURED MOVIES (HORIZONTAL) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewFeaturedMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="128dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="128dp"
-                            android:layout_height="184dp"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="0dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="197dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/movie_1" />
-                        </androidx.cardview.widget.CardView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="#1"
-                            android:textColor="#F4F4F4"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="16dp"
-                        android:layout_height="1dp" />
-
-                    <LinearLayout
-                        android:layout_width="128dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="128dp"
-                            android:layout_height="184dp"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="0dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/movie_2" />
-                        </androidx.cardview.widget.CardView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="#2"
-                            android:textColor="#F4F4F4"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="16dp"
-                        android:layout_height="1dp" />
-
-                    <LinearLayout
-                        android:layout_width="128dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="128dp"
-                            android:layout_height="184dp"
-                            app:cardCornerRadius="16dp"
-                            app:cardElevation="0dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/movie_3" />
-                        </androidx.cardview.widget.CardView>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="#3"
-                            android:textColor="#F4F4F4"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
-            </HorizontalScrollView>
+                android:layout_marginTop="24dp"
+                android:nestedScrollingEnabled="false" />
 
             <TextView
+                android:id="@+id/tvHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
@@ -153,212 +51,14 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <!-- CATEGORY MOVIES (HORIZONTAL) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewCategoricalMovies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="vertical">
+                android:layout_marginTop="24dp"
+                android:nestedScrollingEnabled="false" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
-                    android:orientation="horizontal">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="92dp"
-                        android:layout_height="122dp"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/group1" />
-                    </androidx.cardview.widget.CardView>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="14dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="197dp"
-                            android:layout_height="wrap_content"
-                            android:lineSpacingExtra="2dp"
-                            android:text="DOUTOR ESTRANHO MULTIVERSO DALOUCURA"
-                            android:textColor="#F4F4F4"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                                android:text="MARVEL STUDIOS"
-                            android:textColor="#B8BDC7"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="125,908 views  •  2 days ago"
-                            android:textColor="#7E8693"
-                            android:textSize="11sp" />
-                    </LinearLayout>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="68dp"
-                        android:layout_height="122dp"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/group4" />
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
-                    android:orientation="horizontal">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="92dp"
-                        android:layout_height="122dp"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/group2" />
-                    </androidx.cardview.widget.CardView>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="14dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lineSpacingExtra="2dp"
-                            android:text="AVENGERS ENDGAME"
-                            android:textColor="#F4F4F4"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="MARVEL STUDIOS"
-                            android:textColor="#B8BDC7"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="125,908 views  •  2 days ago"
-                            android:textColor="#7E8693"
-                            android:textSize="11sp" />
-                    </LinearLayout>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="68dp"
-                        android:layout_height="122dp"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/group5" />
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="92dp"
-                        android:layout_height="122dp"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/group3" />
-                    </androidx.cardview.widget.CardView>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="14dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lineSpacingExtra="2dp"
-                            android:text="SEGREDOS DUMBLEDORE"
-                            android:textColor="#F4F4F4"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="MARVEL STUDIOS"
-                            android:textColor="#B8BDC7"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="125,908 views  •  2 days ago"
-                            android:textColor="#7E8693"
-                            android:textSize="11sp" />
-                    </LinearLayout>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="68dp"
-                        android:layout_height="122dp"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/group6" />
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
