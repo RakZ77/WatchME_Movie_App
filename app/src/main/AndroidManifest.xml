@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WatchMe">
+        android:theme="@style/Theme.WatchMe"
+        android:hardwareAccelerated="true">
         <activity android:name=".views.LoadingActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -44,5 +45,6 @@
         <activity android:name=".views.FeedbackActivity"/>
         <activity android:name=".views.EditProfileActivity"/>
         <activity android:name=".views.DetailsAboutMovieActivity"/>
+        <activity android:name=".views.VideoPlayerActivity"/>
     </application>
 </manifest>

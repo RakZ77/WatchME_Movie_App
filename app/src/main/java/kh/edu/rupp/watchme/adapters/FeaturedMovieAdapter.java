@@ -17,11 +17,11 @@ import java.util.List;
 import kh.edu.rupp.watchme.R;
 import kh.edu.rupp.watchme.models.Movie;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+public class FeaturedMovieAdapter extends RecyclerView.Adapter<FeaturedMovieAdapter.MovieViewHolder> {
     private List<Movie> movies = new ArrayList<>();
-    private static OnMovieClickListener listener;
+    private OnMovieClickListener listener;
 
-    public MovieAdapter(List<Movie> movies, OnMovieClickListener listener) {
+    public FeaturedMovieAdapter(List<Movie> movies, OnMovieClickListener listener) {
         this.movies = movies;
         this.listener = listener;
     }
@@ -49,8 +49,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return movies.size();
     }
 
-    public static class MovieViewHolder extends RecyclerView.ViewHolder {
-        private TextView title;
+    public class MovieViewHolder extends RecyclerView.ViewHolder {
+        private TextView title, tvTitle;
         private ImageView moviePoster;
 
         public MovieViewHolder(@NonNull View itemView) {

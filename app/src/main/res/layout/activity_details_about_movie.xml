@@ -7,6 +7,7 @@
     android:background="#242933">
 
     <ScrollView
+        android:layout_marginTop="?actionBarSize"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -43,40 +44,45 @@
                     app:layout_constraintStart_toStartOf="@id/headerImage"
                     app:layout_constraintTop_toTopOf="@id/headerImage" />
 
-                <ImageView
-                    android:id="@+id/btnBack"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_arrow_left"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="#FFFFFF" />
-
-                <TextView
-                    android:id="@+id/titleBar"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Detail"
-                    android:textColor="#F4F4F4"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/btnBack"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/btnBack" />
-
-                <ImageView
-                    android:id="@+id/saveIcon"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_saved"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="#FFFFFF" />
+                    app:layout_constraintVertical_bias="0.0"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/btnBack"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_arrow_left"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/titleBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detail"
+                        android:textColor="#F4F4F4"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"/>
+
+                    <ImageView
+                        android:id="@+id/saveIcon"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_saved"
+                        app:tint="#FFFFFF" />
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/playButton"
@@ -159,7 +165,7 @@
 
                 <LinearLayout
                     android:id="@+id/movieMetaRow"
-                    android:layout_width="265dp"
+                    android:layout_width="0dp"
                     android:layout_height="19dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
