@@ -39,7 +39,6 @@ public class Movie implements Serializable {
     public String getBackdropPath() { return backdrop_path; }
     public String getReleaseDate() { return release_date; }
     public double getVoteAverage() { return vote_average; }
-    public List<Genre> getGenre() { return genres; }
     public int getRuntime() { return runtime; }
 
     public String getProductionCompanies() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,13 +18,17 @@ import com.squareup.picasso.Picasso;
 import kh.edu.rupp.watchme.R;
 import kh.edu.rupp.watchme.models.Movie;
 import kh.edu.rupp.watchme.models.Video;
+import kh.edu.rupp.watchme.models.Watchlist;
 import kh.edu.rupp.watchme.viewmodels.MovieViewModel;
 
 public class DetailsAboutMovieActivity extends AppCompatActivity {
-    private ImageView moviePoster, coverImage, btnBack, btnSave, btnPlay;
+    private ImageView moviePoster, coverImage, btnBack, btnPlay;
     private TextView tvRating, tvMovieTitle, tvPublishDate, tvDuration, tvGenre, tvOverview;
     private MovieViewModel viewModel;
     private String trailerKey = null;
+    private ImageButton btnSave;
+    private Movie currentMovie;
+    private boolean isInWatchlist = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,12 +48,14 @@ public class DetailsAboutMovieActivity extends AppCompatActivity {
         coverImage = findViewById(R.id.headerImage);
         btnBack = findViewById(R.id.btnBack);
         btnPlay = findViewById(R.id.playButton);
+        btnSave = findViewById(R.id.btnSave);
 
         int movieId = getIntent().getIntExtra("movie_id", -1);
 
         if(movieId != -1){
             viewModel.getMovieDetails(movieId).observe(this, movie -> {
                 if(movie != null){
+                    currentMovie = movie;
                     tvMovieTitle.setText(movie.getTitle());
                     tvOverview.setText(movie.getOverview());
                     tvPublishDate.setText(movie.getReleaseDate());
@@ -81,6 +88,35 @@ public class DetailsAboutMovieActivity extends AppCompatActivity {
                 startActivity(intent);
             } else {
                 Toast.makeText(this, "Trailer not available", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        final boolean[] isSavedState = {false};
+
+        viewModel.isInWatchlist(movieId).observe(this, saved  -> {
+            isInWatchlist = saved != null && saved;
+            btnSave.setImageResource(
+                    isInWatchlist ? R.drawable.ic_save_filled : R.drawable.ic_save_outlined
+            );
+        });
+
+        btnSave.setOnClickListener(v -> {
+            if (currentMovie == null) return;
+
+            Watchlist item = new Watchlist(
+                    currentMovie.getId(),
+                    currentMovie.getTitle(),
+                    currentMovie.getPosterPath(),
+                    currentMovie.getVoteAverage(),
+                    currentMovie.getGenreNames(),
+                    currentMovie.getReleaseDate(),
+                    currentMovie.getRuntime()
+            );
+
+            if (isInWatchlist) {
+                viewModel.removeFromWatchlist(item);
+            } else {
+                viewModel.addToWatchlist(item);
             }
         });
     }

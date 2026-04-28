@@ -1,6 +1,7 @@
 package kh.edu.rupp.watchme.viewmodels;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -8,8 +9,10 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
+import kh.edu.rupp.watchme.database.WatchlistDatabase;
 import kh.edu.rupp.watchme.models.Movie;
 import kh.edu.rupp.watchme.models.Video;
+import kh.edu.rupp.watchme.models.Watchlist;
 import kh.edu.rupp.watchme.repositories.MovieRepository;
 
 public class MovieViewModel extends AndroidViewModel {
@@ -18,7 +21,7 @@ public class MovieViewModel extends AndroidViewModel {
 
     public MovieViewModel(Application application) {
         super(application);
-        repo = new MovieRepository();
+        repo = new MovieRepository(application);
     }
 
     public LiveData<List<Movie>> getMovies(String category) {
@@ -37,4 +40,18 @@ public class MovieViewModel extends AndroidViewModel {
         return repo.getMovieDirector(movieId);
     }
 
+    public void addToWatchlist(Watchlist movie) {
+        repo.addToWatchlist(movie);
+    }
+
+    public void removeFromWatchlist(Watchlist movie) {
+        repo.removeFromWatchlist(movie);
+    }
+
+    public LiveData<Boolean> isInWatchlist(int id) {
+        return repo.isInWatchlist(id);
+    }
+    public LiveData<List<Watchlist>> getWatchlist() {
+        return repo.getWatchlist();
+    }
 }

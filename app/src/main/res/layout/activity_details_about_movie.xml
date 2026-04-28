@@ -75,13 +75,14 @@
                         android:textStyle="bold"
                         android:textAlignment="center"/>
 
-                    <ImageView
-                        android:id="@+id/saveIcon"
+                    <ImageButton
+                        android:id="@+id/btnSave"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:padding="12dp"
-                        android:src="@drawable/ic_saved"
-                        app:tint="#FFFFFF" />
+                        android:src="@drawable/ic_save_outlined"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <ImageView

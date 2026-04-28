@@ -1,17 +1,22 @@
 package kh.edu.rupp.watchme.repositories;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
 import kh.edu.rupp.watchme.BuildConfig;
+import kh.edu.rupp.watchme.database.WatchlistDao;
+import kh.edu.rupp.watchme.database.WatchlistDatabase;
 import kh.edu.rupp.watchme.models.CreditsResponse;
 import kh.edu.rupp.watchme.models.CrewMember;
 import kh.edu.rupp.watchme.models.Movie;
 import kh.edu.rupp.watchme.models.MovieResponse;
 import kh.edu.rupp.watchme.models.Video;
 import kh.edu.rupp.watchme.models.VideoResponse;
+import kh.edu.rupp.watchme.models.Watchlist;
 import kh.edu.rupp.watchme.network.RetrofitClient;
 import kh.edu.rupp.watchme.network.TMDbService;
 import retrofit2.Call;
@@ -20,9 +25,13 @@ import retrofit2.Response;
 
 public class MovieRepository {
     private TMDbService api;
+    private WatchlistDao watchlistDao;
 
-    public MovieRepository(){
+
+    public MovieRepository(Context context){
         api = RetrofitClient.getTMDbService();
+        WatchlistDatabase db = WatchlistDatabase.getInstance(context);
+        watchlistDao = db.watchlistDao();
     }
 
     public LiveData<List<Movie>> getMovies(String category) {
@@ -125,5 +134,21 @@ public class MovieRepository {
                 });
 
         return director;
+    }
+
+    public void addToWatchlist(Watchlist movie) {
+        new Thread(() -> watchlistDao.insert(movie)).start();
+    }
+
+    public void removeFromWatchlist(Watchlist movie) {
+        new Thread(() -> watchlistDao.delete(movie)).start();
+    }
+
+    public LiveData<Boolean> isInWatchlist(int id) {
+        return watchlistDao.isInWatchlist(id);
+    }
+
+    public LiveData<List<Watchlist>> getWatchlist() {
+        return watchlistDao.getAll();
     }
 }

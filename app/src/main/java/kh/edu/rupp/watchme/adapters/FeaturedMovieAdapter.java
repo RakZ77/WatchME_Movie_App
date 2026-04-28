@@ -50,7 +50,7 @@ public class FeaturedMovieAdapter extends RecyclerView.Adapter<FeaturedMovieAdap
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
-        private TextView title, tvTitle;
+        private TextView title;
         private ImageView moviePoster;
 
         public MovieViewHolder(@NonNull View itemView) {
