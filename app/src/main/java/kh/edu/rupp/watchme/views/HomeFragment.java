@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
         catergoryRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
         catergoryRecyclerView.setAdapter(sectionAdapter);
 
-        viewModel.getMovies("popular").observe(getViewLifecycleOwner(), movies -> {
+        viewModel.getMovies("popular", 1).observe(getViewLifecycleOwner(), movies -> {
             if (movies != null) {
                 featuredList.clear();
                 featuredList.addAll(movies);
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        viewModel.getMovies("top_rated").observe(getViewLifecycleOwner(), movies -> {
+        viewModel.getMovies("top_rated", 1).observe(getViewLifecycleOwner(), movies -> {
             if (movies != null) {
                 topRatedMovies.clear();
                 topRatedMovies.addAll(movies);
@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        viewModel.getMovies("upcoming").observe(getViewLifecycleOwner(), movies -> {
+        viewModel.getMovies("upcoming", 1).observe(getViewLifecycleOwner(), movies -> {
             if (movies != null) {
                 upcomingMovies.clear();
                 upcomingMovies.addAll(movies);
@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        viewModel.getMovies("now_playing").observe(getViewLifecycleOwner(), movies -> {
+        viewModel.getMovies("now_playing", 1).observe(getViewLifecycleOwner(), movies -> {
             if (movies != null) {
                 nowPlayingMovies.clear();
                 nowPlayingMovies.addAll(movies);

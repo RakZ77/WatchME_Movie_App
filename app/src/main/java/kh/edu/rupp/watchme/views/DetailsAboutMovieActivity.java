@@ -16,9 +16,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.squareup.picasso.Picasso;
 
 import kh.edu.rupp.watchme.R;
+import kh.edu.rupp.watchme.models.AuthResponse;
 import kh.edu.rupp.watchme.models.Movie;
 import kh.edu.rupp.watchme.models.Video;
 import kh.edu.rupp.watchme.models.Watchlist;
+import kh.edu.rupp.watchme.network.RetrofitClient;
+import kh.edu.rupp.watchme.network.SupabaseService;
+import kh.edu.rupp.watchme.utils.SessionManager;
 import kh.edu.rupp.watchme.viewmodels.MovieViewModel;
 
 public class DetailsAboutMovieActivity extends AppCompatActivity {
@@ -93,7 +97,10 @@ public class DetailsAboutMovieActivity extends AppCompatActivity {
 
         final boolean[] isSavedState = {false};
 
-        viewModel.isInWatchlist(movieId).observe(this, saved  -> {
+        SessionManager sessionManager = new SessionManager(this);
+        String userId = sessionManager.getUserId();
+
+        viewModel.isInWatchlist(movieId, userId).observe(this, saved  -> {
             isInWatchlist = saved != null && saved;
             btnSave.setImageResource(
                     isInWatchlist ? R.drawable.ic_save_filled : R.drawable.ic_save_outlined
@@ -105,6 +112,7 @@ public class DetailsAboutMovieActivity extends AppCompatActivity {
 
             Watchlist item = new Watchlist(
                     currentMovie.getId(),
+                    userId,
                     currentMovie.getTitle(),
                     currentMovie.getPosterPath(),
                     currentMovie.getVoteAverage(),

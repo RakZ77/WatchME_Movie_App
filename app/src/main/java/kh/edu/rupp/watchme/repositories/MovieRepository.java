@@ -34,22 +34,25 @@ public class MovieRepository {
         watchlistDao = db.watchlistDao();
     }
 
-    public LiveData<List<Movie>> getMovies(String category) {
+    public LiveData<List<Movie>> getMovies(String category, int page) {
         MutableLiveData<List<Movie>> data = new MutableLiveData<>();
         Call<MovieResponse> call;
 
         switch (category) {
             case "now_playing":
-                call = api.getNowPlayingMovies(BuildConfig.TMDB_API_KEY);
+                call = api.getNowPlayingMovies(BuildConfig.TMDB_API_KEY, page);
                 break;
             case "top_rated":
-                call = api.getTopRatedMovies(BuildConfig.TMDB_API_KEY);
+                call = api.getTopRatedMovies(BuildConfig.TMDB_API_KEY, page);
                 break;
             case "upcoming":
-                call = api.getUpcomingMovies(BuildConfig.TMDB_API_KEY);
+                call = api.getUpcomingMovies(BuildConfig.TMDB_API_KEY, page);
+                break;
+            case "discover":
+                call = api.getDiscoverMovies(BuildConfig.TMDB_API_KEY, page);
                 break;
             default:
-                call = api.getPopularMovies(BuildConfig.TMDB_API_KEY);
+                call = api.getPopularMovies(BuildConfig.TMDB_API_KEY, page);
                 break;
         }
 
@@ -136,6 +139,24 @@ public class MovieRepository {
         return director;
     }
 
+    public LiveData<List<Movie>> searchMovies(String query, int page) {
+        MutableLiveData<List<Movie>> data = new MutableLiveData<>();
+
+        api.searchMovies(BuildConfig.TMDB_API_KEY, query, page)
+                .enqueue(new Callback<MovieResponse>() {
+                    @Override
+                    public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                        data.setValue(response.body().getResults());
+                    }
+
+                    @Override
+                    public void onFailure(Call<MovieResponse> call, Throwable t) {
+                        data.setValue(null);
+                    }
+                });
+        return data;
+    }
+
     public void addToWatchlist(Watchlist movie) {
         new Thread(() -> watchlistDao.insert(movie)).start();
     }
@@ -144,11 +165,11 @@ public class MovieRepository {
         new Thread(() -> watchlistDao.delete(movie)).start();
     }
 
-    public LiveData<Boolean> isInWatchlist(int id) {
-        return watchlistDao.isInWatchlist(id);
+    public LiveData<Boolean> isInWatchlist(int id, String userId) {
+        return watchlistDao.isInWatchlist(id, userId);
     }
 
-    public LiveData<List<Watchlist>> getWatchlist() {
-        return watchlistDao.getAll();
+    public LiveData<List<Watchlist>> getWatchlist(String userId) {
+        return watchlistDao.getAll(userId);
     }
 }

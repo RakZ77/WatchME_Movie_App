@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import kh.edu.rupp.watchme.models.Watchlist;
 
-@Database(entities = {Watchlist.class}, version = 3, exportSchema = false)
+@Database(entities = {Watchlist.class}, version = 4, exportSchema = false)
 public abstract class WatchlistDatabase extends RoomDatabase {
     public abstract WatchlistDao watchlistDao();
     public static WatchlistDatabase INSTANCE;

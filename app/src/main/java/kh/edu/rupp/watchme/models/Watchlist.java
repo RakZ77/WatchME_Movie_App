@@ -1,12 +1,15 @@
 package kh.edu.rupp.watchme.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "watch_list")
+@Entity(tableName = "watch_list",
+        primaryKeys = {"id", "userId"})
 public class Watchlist {
-    @PrimaryKey
     public int id;
+    @NonNull
+    public String userId;
     public String title;
     public String posterPath;
     public double rating;
@@ -14,8 +17,9 @@ public class Watchlist {
     public String releaseDate;
     public int runtime;
 
-    public Watchlist(int id, String title, String posterPath, double rating, String genre, String releaseDate, int runtime) {
+    public Watchlist(int id, String userId, String title, String posterPath, double rating, String genre, String releaseDate, int runtime) {
         this.id = id;
+        this.userId = userId;
         this.title = title;
         this.posterPath = posterPath;
         this.rating = rating;

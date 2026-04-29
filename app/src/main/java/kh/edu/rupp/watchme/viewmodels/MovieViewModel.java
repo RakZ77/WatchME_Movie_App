@@ -24,8 +24,8 @@ public class MovieViewModel extends AndroidViewModel {
         repo = new MovieRepository(application);
     }
 
-    public LiveData<List<Movie>> getMovies(String category) {
-        return repo.getMovies(category);
+    public LiveData<List<Movie>> getMovies(String category, int page) {
+        return repo.getMovies(category, page);
     }
 
     public LiveData<Movie> getMovieDetails(int movieId) {
@@ -48,10 +48,13 @@ public class MovieViewModel extends AndroidViewModel {
         repo.removeFromWatchlist(movie);
     }
 
-    public LiveData<Boolean> isInWatchlist(int id) {
-        return repo.isInWatchlist(id);
+    public LiveData<Boolean> isInWatchlist(int id, String userId) {
+        return repo.isInWatchlist(id, userId);
     }
-    public LiveData<List<Watchlist>> getWatchlist() {
-        return repo.getWatchlist();
+    public LiveData<List<Watchlist>> getWatchlist(String userId) {
+        return repo.getWatchlist(userId);
+    }
+    public LiveData<List<Movie>> searchMovies(String query, int page) {
+        return repo.searchMovies(query, page);
     }
 }

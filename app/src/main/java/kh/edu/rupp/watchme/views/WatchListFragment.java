@@ -21,6 +21,7 @@ import kh.edu.rupp.watchme.R;
 import kh.edu.rupp.watchme.adapters.WatchlistAdapter;
 import kh.edu.rupp.watchme.models.Movie;
 import kh.edu.rupp.watchme.models.Watchlist;
+import kh.edu.rupp.watchme.utils.SessionManager;
 import kh.edu.rupp.watchme.viewmodels.MovieViewModel;
 
 public class WatchListFragment extends Fragment {
@@ -38,7 +39,10 @@ public class WatchListFragment extends Fragment {
         adapter = new WatchlistAdapter(watchlist, this::navigateToDetails);
         recyclerView.setAdapter(adapter);
 
-        viewModel.getWatchlist().observe(getViewLifecycleOwner(), watchlist -> {
+        SessionManager sessionManager = new SessionManager(requireContext());
+        String userId = sessionManager.getUserId();
+
+        viewModel.getWatchlist(userId).observe(getViewLifecycleOwner(), watchlist -> {
             adapter.setData(watchlist);
         });
 
