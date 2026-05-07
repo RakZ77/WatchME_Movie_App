@@ -40,5 +40,19 @@ public class SessionManager {
         return prefs.getString("email", null);
     }
 
+    public void saveProfile(String username, String avatarUrl) {
+        prefs.edit()
+                .putString("username", username)
+                .putString("avatar_url", avatarUrl)
+                .apply();
+    }
+
+    public String getUsername() {
+        return prefs.getString("username", null);
+    }
+
+    public String getAvatarUrl() {
+        return prefs.getString("avatar_url", null);
+    }
 
 }

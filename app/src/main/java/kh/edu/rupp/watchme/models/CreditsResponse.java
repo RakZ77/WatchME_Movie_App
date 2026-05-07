@@ -6,11 +6,11 @@ import java.util.List;
 
 public class CreditsResponse {
     @SerializedName("cast")
-    private List<CrewMember> cast;
+    private List<Cast> cast;
 
     @SerializedName("crew")
     private List<CrewMember> crew;
 
     public List<CrewMember> getCrew() { return crew; }
-    public List<CrewMember> getCast() { return cast; }
+    public List<Cast> getCast() { return cast; }
 }

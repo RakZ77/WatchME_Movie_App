@@ -5,11 +5,13 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kh.edu.rupp.watchme.BuildConfig;
 import kh.edu.rupp.watchme.database.WatchlistDao;
 import kh.edu.rupp.watchme.database.WatchlistDatabase;
+import kh.edu.rupp.watchme.models.Cast;
 import kh.edu.rupp.watchme.models.CreditsResponse;
 import kh.edu.rupp.watchme.models.CrewMember;
 import kh.edu.rupp.watchme.models.Movie;
@@ -137,6 +139,26 @@ public class MovieRepository {
                 });
 
         return director;
+    }
+
+    public LiveData<List<Cast>> getMovieCast(int movieId) {
+        MutableLiveData<List<Cast>> cast = new MutableLiveData<>();
+
+        api.getMovieCredits(movieId, BuildConfig.TMDB_API_KEY)
+                .enqueue(new Callback<CreditsResponse>() {
+                    @Override
+                    public void onResponse(Call<CreditsResponse> call, Response<CreditsResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            cast.setValue(response.body().getCast());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CreditsResponse> call, Throwable t) {
+                        cast.setValue(new ArrayList<>());
+                    }
+                });
+        return cast;
     }
 
     public LiveData<List<Movie>> searchMovies(String query, int page) {

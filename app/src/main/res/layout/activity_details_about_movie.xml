@@ -167,9 +167,8 @@
                 <LinearLayout
                     android:id="@+id/movieMetaRow"
                     android:layout_width="0dp"
-                    android:layout_height="19dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
                     android:layout_marginBottom="16dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -259,61 +258,39 @@
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/detailView_TabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="24dp"
-                android:orientation="horizontal">
+                android:background="@null"
+                app:tabGravity="center"
+                app:tabIndicatorColor="#3A3F47"
+                app:tabTextColor="@color/white"
+                app:tabTextAppearance="@style/MyTabText">
 
-                <TextView
+                <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="About Movie"
-                    android:textColor="#F4F4F4"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="About Movie" />
 
-                <TextView
+                <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="34dp"
-                    android:text="Reviews"
-                    android:textColor="#D1D4DA"
-                    android:textSize="16sp" />
+                    android:text="Reviews" />
 
-                <TextView
+                <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="34dp"
-                    android:text="Cast"
-                    android:textColor="#D1D4DA"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                    android:text="Cast" />
+            </com.google.android.material.tabs.TabLayout>
 
-            <View
-                android:layout_width="78dp"
-                android:layout_height="3dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="10dp"
-                android:background="#5D6572" />
-
-            <TextView
-                android:id="@+id/tvOverview"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="22dp"
-                android:layout_marginEnd="24dp"
-                android:lineSpacingExtra="6dp"
-                android:text="From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences."
-                android:textColor="#E2E4E8"
-                android:textSize="15sp" />
+                android:layout_height="match_parent">
+            </androidx.viewpager2.widget.ViewPager2>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="32dp" />
+
         </LinearLayout>
     </ScrollView>
 

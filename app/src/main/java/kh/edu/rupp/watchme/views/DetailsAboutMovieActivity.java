@@ -12,10 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
 import kh.edu.rupp.watchme.R;
+import kh.edu.rupp.watchme.adapters.ViewPagerAdapter;
 import kh.edu.rupp.watchme.models.AuthResponse;
 import kh.edu.rupp.watchme.models.Movie;
 import kh.edu.rupp.watchme.models.Video;
@@ -27,12 +30,15 @@ import kh.edu.rupp.watchme.viewmodels.MovieViewModel;
 
 public class DetailsAboutMovieActivity extends AppCompatActivity {
     private ImageView moviePoster, coverImage, btnBack, btnPlay;
-    private TextView tvRating, tvMovieTitle, tvPublishDate, tvDuration, tvGenre, tvOverview;
+    private TextView tvRating, tvMovieTitle, tvPublishDate, tvDuration, tvGenre;
     private MovieViewModel viewModel;
     private String trailerKey = null;
     private ImageButton btnSave;
     private Movie currentMovie;
     private boolean isInWatchlist = false;
+    private ViewPager2 viewPager2;
+    private TabLayout tabLayout;
+    private ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,21 +53,50 @@ public class DetailsAboutMovieActivity extends AppCompatActivity {
         tvPublishDate = findViewById(R.id.tvPublishDate);
         tvDuration = findViewById(R.id.tvDuration);
         tvGenre = findViewById(R.id.tvGenre);
-        tvOverview = findViewById(R.id.tvOverview);
         moviePoster = findViewById(R.id.moviePoster);
         coverImage = findViewById(R.id.headerImage);
         btnBack = findViewById(R.id.btnBack);
         btnPlay = findViewById(R.id.playButton);
         btnSave = findViewById(R.id.btnSave);
 
+        tabLayout = findViewById(R.id.detailView_TabLayout);
+        viewPager2 = findViewById(R.id.viewPager);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager2.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        // Set up ViewPager2 to show selected tab
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback(){
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                tabLayout.getTabAt(position).select();
+            }
+        });
+
         int movieId = getIntent().getIntExtra("movie_id", -1);
+        viewPagerAdapter = new ViewPagerAdapter(this, movieId);
+        viewPager2.setAdapter(viewPagerAdapter);
 
         if(movieId != -1){
             viewModel.getMovieDetails(movieId).observe(this, movie -> {
                 if(movie != null){
                     currentMovie = movie;
                     tvMovieTitle.setText(movie.getTitle());
-                    tvOverview.setText(movie.getOverview());
                     tvPublishDate.setText(movie.getReleaseDate());
                     tvRating.setText(String.format("%.1f", movie.getVoteAverage()));
                     tvDuration.setText(movie.getRuntime() + " mins");

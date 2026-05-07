@@ -15,5 +15,11 @@ public class UpdateProfileRequest {
         this.gender = gender;
         this.location = location;
     }
+
+    public String getUsername() { return username; }
+    public String getAvatarUrl() { return avatar_url; }
+    public String getBirthday() { return birthday; }
+    public String getGender() { return gender; }
+    public String getLocation() { return location; }
 }
 

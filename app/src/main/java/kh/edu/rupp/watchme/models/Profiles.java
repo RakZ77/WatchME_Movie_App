@@ -1,14 +1,26 @@
 package kh.edu.rupp.watchme.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Profiles {
+    @SerializedName("id")
     private String id;
+    @SerializedName("username")
     private String username;
+    @SerializedName("avatar_url")
     private String avatar_url;
+    @SerializedName("birthday")
     private String birthday;
+    @SerializedName("gender")
     private String gender;
+    @SerializedName("location")
     private String location;
 
-    // Getter methods for the fields
+
+    public Profiles(String username, String avatar_url) {
+        this.username = username;
+        this.avatar_url = avatar_url;
+    }
 
     public String getUsername() {
         return username;

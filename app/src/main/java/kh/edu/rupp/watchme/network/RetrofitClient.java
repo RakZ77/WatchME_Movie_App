@@ -25,34 +25,35 @@ public class RetrofitClient {
     }
 
     public static Retrofit getClient() {
-        if (retrofit == null) {
-            OkHttpClient client = new OkHttpClient.Builder()
-                    .addInterceptor(chain -> {
-                        String token = sessionManager != null ? sessionManager.getAccessToken() : null;
-                        Request original = chain.request();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(chain -> {
+                    String token = sessionManager != null ? sessionManager.getAccessToken() : null;
+                    android.util.Log.d("RetrofitClient", "sessionManager null? " + (sessionManager == null));
+                    android.util.Log.d("RetrofitClient", "Token used: " + token);
+                    Request original = chain.request();
 
-                        Request.Builder builder = chain.request().newBuilder()
-                                .addHeader("apikey", BuildConfig.SUPABASE_ANON_KEY);
+                    Request.Builder builder = chain.request().newBuilder()
+                            .addHeader("apikey", BuildConfig.SUPABASE_ANON_KEY);
 
-                        if(original.header("Content-Type") == null){
-                            builder.addHeader("Content-Type", "application/json");
-                        }
+                    if(original.header("Content-Type") == null){
+                        builder.addHeader("Content-Type", "application/json");
+                    }
 
-                        if (token != null) {
-                            builder.addHeader("Authorization", "Bearer " + token);
-                        }
+                    if (token != null) {
+                        builder.addHeader("Authorization", "Bearer " + token);
+                    }
 
-                        return chain.proceed(builder.build());
-                    }).build();
+                    return chain.proceed(builder.build());
+                }).build();
 
-            Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().create();
 
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .client(client)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-        }
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
         return retrofit;
     }
     public static SupabaseService getSupabaseService(){

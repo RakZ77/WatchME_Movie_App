@@ -6,6 +6,8 @@ import java.util.Map;
 import kh.edu.rupp.watchme.models.AuthResponse;
 import kh.edu.rupp.watchme.models.ForgotRequest;
 import kh.edu.rupp.watchme.models.Profiles;
+import kh.edu.rupp.watchme.models.Review;
+import kh.edu.rupp.watchme.models.ReviewRequest;
 import kh.edu.rupp.watchme.models.SignInRequest;
 import kh.edu.rupp.watchme.models.SignUpRequest;
 import kh.edu.rupp.watchme.models.UpdateProfileRequest;
@@ -57,5 +59,16 @@ public interface SupabaseService {
             @Header("Content-Type") String contentType,
             @Path("filename") String filename,
             @Body RequestBody image
+    );
+    @GET("rest/v1/review")
+    Call<List<Review>> getReviews(
+            @Query("select") String select,
+            @Query("movie_id") String movieIdFilter
+    );
+
+    @POST("rest/v1/review")
+    Call<List<Review>> addReviews(
+            @Header("Prefer") String prefer,
+            @Body ReviewRequest review
     );
 }

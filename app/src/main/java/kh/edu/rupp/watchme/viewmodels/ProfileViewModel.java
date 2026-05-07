@@ -14,12 +14,14 @@ import java.util.List;
 import kh.edu.rupp.watchme.models.Profiles;
 import kh.edu.rupp.watchme.models.UpdateProfileRequest;
 import kh.edu.rupp.watchme.repositories.ProfileRepository;
+import kh.edu.rupp.watchme.utils.SessionManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileViewModel extends AndroidViewModel {
     private ProfileRepository repo;
+    private SessionManager sessionManager;
     private MutableLiveData<Profiles> userProfile = new MutableLiveData<>();
     private MutableLiveData<Boolean> updateResult = new MutableLiveData<>();
     private MutableLiveData<String> avatarUploadResult = new MutableLiveData<>();
@@ -28,6 +30,7 @@ public class ProfileViewModel extends AndroidViewModel {
     public ProfileViewModel (Application application) {
         super(application);
         repo = new ProfileRepository(application.getApplicationContext());
+        sessionManager = new SessionManager(application.getApplicationContext());
     }
 
     // Get user profile
@@ -36,7 +39,14 @@ public class ProfileViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<List<Profiles>> call, Response<List<Profiles>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    userProfile.postValue(response.body().get(0));
+                    Profiles profile = response.body().get(0);
+
+                    sessionManager.saveProfile(
+                            profile.getUsername(),
+                            profile.getAvatar_url()
+                    );
+
+                    userProfile.postValue(profile);
                 }else {
                     try {
                         String err = response.errorBody() != null ? response.errorBody().string() : "empty body";
@@ -66,6 +76,12 @@ public class ProfileViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()) {
+                    sessionManager.saveProfile(
+                            request.getUsername(),
+                            request.getAvatarUrl() != null
+                                    ? request.getAvatarUrl()
+                                    : sessionManager.getAvatarUrl()
+                    );
                     updateResult.postValue(true);
                 }else {
                     Log.e("PROFILE_UPDATE", "FAILED: " + response.code());

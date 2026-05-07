@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.gson)
     implementation(libs.picasso)
+    implementation(libs.cardview)
     annotationProcessor("androidx.room:room-compiler:2.8.4")
     implementation("androidx.datastore:datastore-preferences-rxjava3:1.2.0")
     implementation("io.reactivex.rxjava3:rxjava:3.1.6")

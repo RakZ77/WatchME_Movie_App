@@ -10,6 +10,8 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import kh.edu.rupp.watchme.database.WatchlistDatabase;
+import kh.edu.rupp.watchme.models.Cast;
+import kh.edu.rupp.watchme.models.CrewMember;
 import kh.edu.rupp.watchme.models.Movie;
 import kh.edu.rupp.watchme.models.Video;
 import kh.edu.rupp.watchme.models.Watchlist;
@@ -38,6 +40,10 @@ public class MovieViewModel extends AndroidViewModel {
 
     public LiveData<String> getMovieDirector(int movieId) {
         return repo.getMovieDirector(movieId);
+    }
+
+    public LiveData<List<Cast>> getMovieCast(int movieId) {
+        return repo.getMovieCast(movieId);
     }
 
     public void addToWatchlist(Watchlist movie) {
