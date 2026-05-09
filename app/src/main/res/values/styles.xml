@@ -3,7 +3,7 @@
 
     <style name="CircleImage">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">29dp</item>
+        <item name="cornerSize">25dp</item>
     </style>
 
     <style name="MyTabText" parent="TextAppearance.MaterialComponents.Button">
