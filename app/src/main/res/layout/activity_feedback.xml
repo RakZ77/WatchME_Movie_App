@@ -70,7 +70,9 @@
                 android:textColor="#D6D6D6"
                 android:textSize="14sp" />
 
+            <!-- ADDED android:id="@+id/etFeedback" HERE -->
             <EditText
+                android:id="@+id/etFeedback"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
                 android:layout_marginTop="18dp"
@@ -86,7 +88,9 @@
                 android:textColorHint="#7E838D"
                 android:textSize="14sp" />
 
+            <!-- ADDED android:id="@+id/btnSubmit" HERE -->
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmit"
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center_horizontal"

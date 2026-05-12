@@ -13,6 +13,7 @@ import kh.edu.rupp.watchme.models.SignUpRequest;
 import kh.edu.rupp.watchme.models.UpdateProfileRequest;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import kh.edu.rupp.watchme.models.FeedbackRequest;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -70,5 +71,10 @@ public interface SupabaseService {
     Call<List<Review>> addReviews(
             @Header("Prefer") String prefer,
             @Body ReviewRequest review
+    );
+    @POST("rest/v1/feedback")
+    Call<Void> submitFeedback(
+            @Header("Prefer") String prefer,
+            @Body FeedbackRequest feedback
     );
 }
