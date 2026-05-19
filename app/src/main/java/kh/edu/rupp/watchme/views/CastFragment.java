@@ -41,8 +41,8 @@ public class CastFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         int movieId = getArguments().getInt(ARG_MOVIE_ID);
 
-        RecyclerView recyclerView = view.findViewById(R.id.castRecyclerView);  // ← add this
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        RecyclerView recyclerView = view.findViewById(R.id.castRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
 
         CastAdapter adapter = new CastAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
