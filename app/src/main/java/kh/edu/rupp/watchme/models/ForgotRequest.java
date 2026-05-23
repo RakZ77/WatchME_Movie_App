@@ -1,20 +1,21 @@
-package kh.edu.rupp.watchme.models;
+    package kh.edu.rupp.watchme.models;
 
-public class ForgotRequest {
+    import com.google.gson.annotations.SerializedName;
 
-    private String email;
+    public class ForgotRequest {
 
-    public ForgotRequest(String email) {
-        this.email = email;
+        private String email;
+        public ForgotRequest(String email) {
+            this.email = email;
+        }
+
+        // Getter
+        public String getEmail() {
+            return email;
+        }
+
+        // Setter
+        public void setEmail(String email) {
+            this.email = email;
+        }
     }
-
-    // Getter
-    public String getEmail() {
-        return email;
-    }
-
-    // Setter
-    public void setEmail(String email) {
-        this.email = email;
-    }
-}

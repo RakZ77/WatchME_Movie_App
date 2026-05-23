@@ -117,6 +117,17 @@ public class AuthViewModel extends AndroidViewModel {
         return updatePasswordResult;
     }
 
+    private MutableLiveData<String> verifyOtpResult = new MutableLiveData<>();
+
+    public LiveData<String> getVerifyOtpResult() { return verifyOtpResult; }
+
+    public void verifyOtp(String tokenHash, String type) {
+        repo.verifyOtp(tokenHash, type,
+                token -> verifyOtpResult.postValue(token),
+                ()    -> verifyOtpResult.postValue(null)
+        );
+    }
+
     // Session
     public void saveSession(String accessToken, String refreshToken, String userId){
         repo.saveSession(accessToken, refreshToken, userId);
@@ -127,6 +138,5 @@ public class AuthViewModel extends AndroidViewModel {
     public boolean isSignedIn(){
         return repo.isSignedIn();
     }
-
 
 }

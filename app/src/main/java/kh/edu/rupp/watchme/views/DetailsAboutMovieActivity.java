@@ -123,7 +123,7 @@ public class DetailsAboutMovieActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(v -> {
             if (trailerKey != null) {
                 Intent intent = new Intent(this, VideoPlayerActivity.class);
-                intent.putExtra("trailer_key", trailerKey);
+                intent.putExtra("movie_id", movieId);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, "Trailer not available", Toast.LENGTH_SHORT).show();

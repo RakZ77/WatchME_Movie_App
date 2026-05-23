@@ -28,7 +28,10 @@ public interface SupabaseService {
     Call<AuthResponse> signIn(@Body SignInRequest request);
 
     @POST("auth/v1/recover")
-    Call<Void> forgotPassword(@Body ForgotRequest request);
+    Call<Void> forgotPassword(
+            @Query("redirect_to") String redirectTo,
+            @Body ForgotRequest request
+    );
 
     @POST("auth/v1/signup")
     Call<AuthResponse> signUp(@Body SignUpRequest request);
@@ -77,4 +80,7 @@ public interface SupabaseService {
             @Header("Prefer") String prefer,
             @Body FeedbackRequest feedback
     );
+
+    @POST("auth/v1/verify")
+    Call<AuthResponse> verifyOtp(@Body Map<String, String> body);
 }

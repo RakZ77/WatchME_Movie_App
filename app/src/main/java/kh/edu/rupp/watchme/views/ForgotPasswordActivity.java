@@ -46,7 +46,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
 
         viewModel.getForgotResult().observe(this, success -> {
-            if(success != null){
+            if (success == null) return;
+
+            if(success){
                 tvEmailError.setVisibility(View.GONE);
                 Toast.makeText(this,
                         "Reset link sent! Check your email.",
@@ -56,7 +58,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 finish();
 
             }else {
-                showError(tvEmailError, "Invalid email");
+                showError(tvEmailError, "Could not send reset email. Check the address and try again.");
             }
         });
 
