@@ -15,7 +15,6 @@
         android:textSize="14sp"
         android:textColor="#8A909B"
         android:lineSpacingExtra="6dp"
-        android:text="From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences."
         android:justificationMode="inter_character"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.MemoryPolicy;
@@ -32,7 +33,8 @@ public class ProfileFragment extends Fragment {
     private SessionManager sessionManager;
     private MaterialButton btnLogout;
     private ShapeableImageView imgProfile;
-    private LinearLayout settingAct, membershipAct, notificationAct, helpAct, aboutAct, feedbackAct;
+    private LinearLayout settingAct, membershipAct, notificationAct, helpAct, aboutAct, feedbackAct, cardContainer;
+    private ShimmerFrameLayout shimmerLayout;
 
     @Nullable
     @Override
@@ -49,6 +51,10 @@ public class ProfileFragment extends Fragment {
         helpAct = view.findViewById(R.id.itemHelpCenter);
         aboutAct = view.findViewById(R.id.itemAbout);
         feedbackAct = view.findViewById(R.id.itemFeedback);
+        cardContainer = view.findViewById(R.id.cardContainer);
+        shimmerLayout = view.findViewById(R.id.shimmerLayout);
+
+        shimmerLayout.startShimmer();
 
         sessionManager = new SessionManager(requireContext());
         authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
@@ -59,6 +65,11 @@ public class ProfileFragment extends Fragment {
         profileViewModel.getUserProfile(userId);
 
         profileViewModel.getUserProfileLiveData().observe(getViewLifecycleOwner(), profile -> {
+
+            shimmerLayout.stopShimmer();
+            shimmerLayout.setVisibility(View.GONE);
+            cardContainer.setVisibility(View.VISIBLE);
+
             if (profile != null) {
                 tvName.setText(profile.getUsername());
 
@@ -112,6 +123,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        shimmerLayout.startShimmer();
+        shimmerLayout.setVisibility(View.VISIBLE);
+        cardContainer.setVisibility(View.GONE);
+
         String userId = sessionManager.getUserId();
         String token = sessionManager.getAccessToken();
         profileViewModel.getUserProfile(userId);

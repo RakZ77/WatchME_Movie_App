@@ -23,10 +23,18 @@ import kh.edu.rupp.watchme.R;
 public class VideoPlayerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        // Hide the action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
 
         ImageView btnBack = findViewById(R.id.btnBack);
+        btnBack.bringToFront();
+        btnBack.setOnClickListener(v -> finish());
+
         WebView webView = findViewById(R.id.webView);
 
         int movieId = getIntent().getIntExtra("movie_id", -1);

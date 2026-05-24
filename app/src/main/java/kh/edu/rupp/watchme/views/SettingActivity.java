@@ -2,6 +2,7 @@ package kh.edu.rupp.watchme.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import kh.edu.rupp.watchme.R;
 import kh.edu.rupp.watchme.models.Profiles;
@@ -21,7 +24,8 @@ public class SettingActivity extends AppCompatActivity {
     private ProfileViewModel profileViewModel;
     private SessionManager sessionManager;
     private TextView tvUsername, tvBirthday, tvContact, tvGender, tvLocation;
-    private LinearLayout btnChangeProfile;
+    private LinearLayout btnChangeProfile, cardContainer;
+    private ShimmerFrameLayout shimmerLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,10 @@ public class SettingActivity extends AppCompatActivity {
         tvGender = findViewById(R.id.tvGender);
         tvLocation = findViewById(R.id.tvLocation);
         btnChangeProfile = findViewById(R.id.btnChangeProfile);
+        cardContainer = findViewById(R.id.cardContainer);
+        shimmerLayout = findViewById(R.id.shimmerLayout);
+
+        shimmerLayout.startShimmer();
 
         sessionManager = new SessionManager(this);
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
@@ -48,6 +56,11 @@ public class SettingActivity extends AppCompatActivity {
         profileViewModel.getUserProfile(userId);
 
         profileViewModel.getUserProfileLiveData().observe(this, profile -> {
+
+            shimmerLayout.stopShimmer();
+            shimmerLayout.setVisibility(View.GONE);
+            cardContainer.setVisibility(View.VISIBLE);
+
             if (profile != null) {
                 tvUsername.setText(profile.getUsername());
                 tvContact.setText(email);
@@ -83,6 +96,11 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        shimmerLayout.startShimmer();
+        shimmerLayout.setVisibility(View.VISIBLE);
+        cardContainer.setVisibility(View.GONE);
+
         profileViewModel.getUserProfile(sessionManager.getUserId());
     }
 }

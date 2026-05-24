@@ -71,7 +71,7 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
     implementation("com.google.android.material:material:1.11.0")
     implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
-
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/spidermannowayhome" />
+                android:src="@drawable/default_poster" />
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
@@ -43,7 +43,6 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Spider-Man: No Way Home"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
@@ -64,7 +63,6 @@
                     android:id="@+id/tvRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8.5"
                     android:textColor="#F5A623"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -87,7 +85,6 @@
                     android:id="@+id/tvGenre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Action"
                     android:textColor="#D9D9D9"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -109,7 +106,6 @@
                     android:id="@+id/tvPublishDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2021"
                     android:textColor="#D9D9D9"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -131,7 +127,6 @@
                     android:id="@+id/tvDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="139 minutes"
                     android:textColor="#D9D9D9"
                     android:textSize="14sp" />
             </LinearLayout>
