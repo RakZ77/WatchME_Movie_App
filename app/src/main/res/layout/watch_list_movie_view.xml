@@ -19,6 +19,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:layout_gravity="center_vertical"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp">
             <ImageView
@@ -39,7 +40,7 @@
 
             <TextView
                 android:id="@+id/tvMovieTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"

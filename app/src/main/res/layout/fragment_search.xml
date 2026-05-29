@@ -31,7 +31,7 @@
                 android:layout_marginTop="24dp"
                 android:text="What do you want to watch?"
                 android:textColor="#F5F5F5"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <LinearLayout

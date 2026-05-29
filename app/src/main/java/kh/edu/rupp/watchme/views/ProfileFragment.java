@@ -33,7 +33,7 @@ public class ProfileFragment extends Fragment {
     private SessionManager sessionManager;
     private MaterialButton btnLogout;
     private ShapeableImageView imgProfile;
-    private LinearLayout settingAct, membershipAct, notificationAct, helpAct, aboutAct, feedbackAct, cardContainer;
+    private LinearLayout settingAct, membershipAct, helpAct, aboutAct, feedbackAct, cardContainer;
     private ShimmerFrameLayout shimmerLayout;
 
     @Nullable
@@ -47,7 +47,6 @@ public class ProfileFragment extends Fragment {
 
         settingAct = view.findViewById(R.id.itemSettings);
         membershipAct = view.findViewById(R.id.itemMembership);
-        notificationAct = view.findViewById(R.id.itemNotification);
         helpAct = view.findViewById(R.id.itemHelpCenter);
         aboutAct = view.findViewById(R.id.itemAbout);
         feedbackAct = view.findViewById(R.id.itemFeedback);
@@ -79,11 +78,9 @@ public class ProfileFragment extends Fragment {
                             .load(url)
                             .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                             .networkPolicy(NetworkPolicy.NO_CACHE)
-                            .placeholder(R.drawable.cat_profile)
-                            .error(R.drawable.cat_profile)
                             .into(imgProfile);
                 } else {
-                    imgProfile.setImageResource(R.drawable.cat_profile);
+                    imgProfile.setImageResource(R.drawable.profile);
                 }
             } else {
                 tvName.setText("No name");
@@ -106,9 +103,6 @@ public class ProfileFragment extends Fragment {
         });
         membershipAct.setOnClickListener(v -> {
             startActivity(new Intent(requireActivity(), MembershipActivity.class));
-        });
-        notificationAct.setOnClickListener(v -> {
-            startActivity(new Intent(requireActivity(), NotificationActivity.class));
         });
         feedbackAct.setOnClickListener(v -> {
             startActivity(new Intent(requireActivity(), FeedbackActivity.class));

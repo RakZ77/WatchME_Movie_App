@@ -82,6 +82,7 @@
                         android:padding="12dp"
                         android:src="@drawable/ic_save_outlined"
                         android:background="@null"
+                        android:contentDescription="Save Movie"
                         />
                 </LinearLayout>
 

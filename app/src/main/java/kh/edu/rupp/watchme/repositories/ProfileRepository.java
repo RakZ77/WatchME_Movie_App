@@ -94,16 +94,15 @@ public class ProfileRepository {
         void onFailure();
     }
 
-    public void uploadAndUpdateAvatar(String userId, Uri imageUri, Context context, OnAvatarUploaded callback) {
+    public void uploadAndUpdateAvatar(String userId, Uri imageUri, Context context,
+                                      String oldAvatarUrl, OnAvatarUploaded callback) {
         try {
             InputStream inputStream = context.getContentResolver().openInputStream(imageUri);
             byte[] imageBytes = readBytes(inputStream);
-
             String contentType = context.getContentResolver().getType(imageUri);
             if (contentType == null) contentType = "image/jpeg";
 
             RequestBody requestBody = RequestBody.create(MediaType.parse(contentType), imageBytes);
-
             String fileName = userId + "_" + System.currentTimeMillis() + ".jpg";
             String publicUrl = "https://scnjqgmuxdkkicbvvuiz.supabase.co"
                     + "/storage/v1/object/public/avatars/" + fileName;
@@ -112,14 +111,23 @@ public class ProfileRepository {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
+                        // Delete old avatar after successful upload
+                        if (oldAvatarUrl != null && !oldAvatarUrl.isEmpty()) {
+                            deleteAvatar(oldAvatarUrl, new OnAvatarDeleted() {
+                                @Override public void onSuccess() {
+                                    Log.d("AVATAR_DELETE", "Old avatar deleted");
+                                }
+                                @Override public void onFailure() {
+                                    Log.w("AVATAR_DELETE", "Could not delete old avatar");
+                                }
+                            });
+                        }
+
                         updateAvatarUrl(userId, publicUrl, new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> c, Response<Void> r) {
-                                if (r.isSuccessful()) {
-                                    callback.onSuccess(publicUrl);
-                                } else {
-                                    callback.onFailure();
-                                }
+                                if (r.isSuccessful()) callback.onSuccess(publicUrl);
+                                else callback.onFailure();
                             }
                             @Override
                             public void onFailure(Call<Void> c, Throwable t) {
@@ -127,16 +135,12 @@ public class ProfileRepository {
                             }
                         });
                     } else {
-                        try {
-                            Log.e("AVATAR_UPLOAD", response.errorBody().string());
-                        } catch (Exception e) { e.printStackTrace(); }
                         callback.onFailure();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Log.e("AVATAR_UPLOAD", t.getMessage());
                     callback.onFailure();
                 }
             });
@@ -171,6 +175,56 @@ public class ProfileRepository {
                         callback.onFailure(call, t);
                     }
                 });
+    }
+
+    public interface OnAvatarDeleted {
+        void onSuccess();
+        void onFailure();
+    }
+
+    // Extract filename from full Supabase URL
+    private String extractFileName(String avatarUrl) {
+        if (avatarUrl == null || avatarUrl.isEmpty()) return null;
+        // URL format: .../storage/v1/object/public/avatars/FILENAME
+        return avatarUrl.substring(avatarUrl.lastIndexOf("/") + 1);
+    }
+
+    public void deleteAvatar(String avatarUrl, OnAvatarDeleted callback) {
+        String fileName = extractFileName(avatarUrl);
+        if (fileName == null) {
+            Log.e("AVATAR_DELETE", "Could not extract filename from: " + avatarUrl);
+            callback.onFailure();
+            return;
+        }
+
+        Log.d("AVATAR_DELETE", "Deleting file: " + fileName);
+
+        String jsonBody = "{\"prefixes\":[\"" + fileName + "\"]}";
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonBody);
+
+
+        api.deleteAvatar(body).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("AVATAR_DELETE", "Successfully deleted: " + fileName);
+                    callback.onSuccess();
+                } else {
+                    Log.e("AVATAR_DELETE", "Failed: " + response.code());
+                    try {
+                        Log.e("AVATAR_DELETE", "Failed " + response.code()
+                                + ": " + response.errorBody().string());
+                    } catch (Exception e) { e.printStackTrace(); }
+                    callback.onFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("AVATAR_DELETE", t.getMessage());
+                callback.onFailure();
+            }
+        });
     }
 
     // Helper to read bytes from InputStream

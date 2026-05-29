@@ -35,6 +35,9 @@
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold" />
+        <View
+            android:layout_width="48dp"
+            android:layout_height="48dp"/>
     </LinearLayout>
 
 
@@ -93,8 +96,7 @@
                 android:src="@drawable/upload_profile"
                 android:textColor="#FFFFFF"
                 android:textSize="17sp"
-                android:textStyle="bold"
-                android:tint="@color/Input_Background" />
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <View
@@ -130,7 +132,9 @@
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:inputType="date"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                android:textColorHint="#898989"
+                android:hint="Click to select a new birthday"/>
         </LinearLayout>
 
         <View
@@ -160,10 +164,12 @@
                 android:layout_height="48dp"
                 android:paddingVertical="2dp"
                 android:textColor="#FFFFFF"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:background="@android:color/transparent"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColorHint="#898989"
+                android:hint="Enter a new username"/>
         </LinearLayout>
 
         <View
@@ -234,9 +240,11 @@
                 android:layout_height="48dp"
                 android:paddingVertical="2dp"
                 android:textColor="#FFFFFF"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:textColorHint="#898989"
+                android:hint="Enter a new location"/>
         </LinearLayout>
     </LinearLayout>
 

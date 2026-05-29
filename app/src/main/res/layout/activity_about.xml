@@ -35,8 +35,8 @@
             android:textStyle="bold" />
 
         <View
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
     </LinearLayout>
 
     <ScrollView

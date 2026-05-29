@@ -25,6 +25,7 @@ public class ProfileViewModel extends AndroidViewModel {
     private MutableLiveData<Profiles> userProfile = new MutableLiveData<>();
     private MutableLiveData<Boolean> updateResult = new MutableLiveData<>();
     private MutableLiveData<String> avatarUploadResult = new MutableLiveData<>();
+    private MutableLiveData<Boolean> deleteAvatarResult = new MutableLiveData<>();
     private String pendingAvatarUrl = null;
 
     public ProfileViewModel (Application application) {
@@ -99,19 +100,47 @@ public class ProfileViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> getUpdateResult() { return updateResult; }
 
-    public void uploadAvatar(String userId, Uri imageUri, Context context) {
-        repo.uploadAndUpdateAvatar(userId, imageUri, context, new ProfileRepository.OnAvatarUploaded() {
+    // Pass oldAvatarUrl when uploading
+    public void uploadAvatar(String userId, Uri imageUri, Context context, String oldAvatarUrl) {
+        repo.uploadAndUpdateAvatar(userId, imageUri, context, oldAvatarUrl,
+                new ProfileRepository.OnAvatarUploaded() {
+                    @Override
+                    public void onSuccess(String publicUrl) {
+                        pendingAvatarUrl = publicUrl;
+                        avatarUploadResult.postValue("success");
+                    }
+                    @Override
+                    public void onFailure() {
+                        avatarUploadResult.postValue("failed");
+                    }
+                });
+    }
+
+    // Remove avatar (set to null in DB + delete from storage)
+    public void removeAvatar(String userId, String currentAvatarUrl) {
+        repo.deleteAvatar(currentAvatarUrl, new ProfileRepository.OnAvatarDeleted() {
             @Override
-            public void onSuccess(String publicUrl) {
-                pendingAvatarUrl = publicUrl;
-                avatarUploadResult.postValue("success");
+            public void onSuccess() {
+                UpdateProfileRequest request = new UpdateProfileRequest(null, "", null, null, null);
+                repo.updateUserProfile(userId, request, new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        deleteAvatarResult.postValue(response.isSuccessful());
+                    }
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        deleteAvatarResult.postValue(false);
+                    }
+                });
             }
             @Override
             public void onFailure() {
-                avatarUploadResult.postValue("failed");
+                deleteAvatarResult.postValue(false);
             }
         });
     }
+
+    public LiveData<Boolean> getDeleteAvatarResult() { return deleteAvatarResult; }
     public String getPendingAvatarUrl() { return pendingAvatarUrl; }
 
     public LiveData<String> getAvatarUploadResult() { return avatarUploadResult; }

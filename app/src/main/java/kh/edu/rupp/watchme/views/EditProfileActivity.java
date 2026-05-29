@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -92,14 +93,15 @@ public class EditProfileActivity extends AppCompatActivity {
         etBirthday.setText(getIntent().getStringExtra("birthday"));
         etLocation.setText(getIntent().getStringExtra("location"));
         spinnerGender.setText(getIntent().getStringExtra("gender"), false);
-        avatarUrl = getIntent().getStringExtra("avatar_url"); // ✅ set avatarUrl here
+        avatarUrl = getIntent().getStringExtra("avatar_url");
+        Log.d("EditProfile", "avatarUrl received: " + avatarUrl);
 
         if (avatarUrl != null && !avatarUrl.isEmpty()) {
             Picasso.get()
                     .load(avatarUrl)
                     .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                     .networkPolicy(NetworkPolicy.NO_CACHE)
-                    .placeholder(R.drawable.cat_profile)
+                    .placeholder(R.drawable.default_profile)
                     .into(imgAvatar);
         }
 
@@ -121,7 +123,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             if (pendingImageUri != null) {
                 // Upload avatar first, then save will be triggered in getAvatarUploadResult observer
-                profileViewModel.uploadAvatar(userId, pendingImageUri, this);
+                profileViewModel.uploadAvatar(userId, pendingImageUri, this, avatarUrl);
             } else {
                 // No new image, save directly
                 saveProfile(username, avatarUrl, birthday, gender, location);
@@ -158,6 +160,31 @@ public class EditProfileActivity extends AppCompatActivity {
                 btnSave.setEnabled(true);
                 btnSave.setText("Save");
                 Toast.makeText(this, "Update failed. Try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        imgAvatar.setOnLongClickListener(v -> {
+            if (avatarUrl != null && !avatarUrl.isEmpty()) {
+                new androidx.appcompat.app.AlertDialog.Builder(this)
+                        .setTitle("Remove Photo")
+                        .setMessage("Remove your profile picture?")
+                        .setPositiveButton("Remove", (dialog, which) -> {
+                            profileViewModel.removeAvatar(userId, avatarUrl);
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            }
+            return true;
+        });
+
+// Observe remove result
+        profileViewModel.getDeleteAvatarResult().observe(this, success -> {
+            if (success) {
+                avatarUrl = "";
+                imgAvatar.setImageResource(R.drawable.cat_profile);
+                Toast.makeText(this, "Photo removed", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Failed to remove photo", Toast.LENGTH_SHORT).show();
             }
         });
     }

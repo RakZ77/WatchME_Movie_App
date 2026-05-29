@@ -28,8 +28,6 @@ public class RetrofitClient {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(chain -> {
                     String token = sessionManager != null ? sessionManager.getAccessToken() : null;
-                    android.util.Log.d("RetrofitClient", "sessionManager null? " + (sessionManager == null));
-                    android.util.Log.d("RetrofitClient", "Token used: " + token);
                     Request original = chain.request();
 
                     Request.Builder builder = chain.request().newBuilder()

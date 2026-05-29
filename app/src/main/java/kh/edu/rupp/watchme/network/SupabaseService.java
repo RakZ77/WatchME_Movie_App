@@ -15,7 +15,9 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import kh.edu.rupp.watchme.models.FeedbackRequest;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -64,6 +66,9 @@ public interface SupabaseService {
             @Path("filename") String filename,
             @Body RequestBody image
     );
+
+    @HTTP(method = "DELETE", path = "storage/v1/object/avatars", hasBody = true)
+    Call<Void> deleteAvatar(@Body RequestBody body);
     @GET("rest/v1/review")
     Call<List<Review>> getReviews(
             @Query("select") String select,
