@@ -41,7 +41,7 @@
 
             <TextView
                 android:id="@+id/tvMovieTitle"
-                android:layout_width="197dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="2dp"
                 android:textColor="#F4F4F4"
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:textColor="#B8BDC7"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvGenre"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textColor="#7E8693"
-                android:textSize="11sp" />
+                android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>
 

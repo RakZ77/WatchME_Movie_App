@@ -60,6 +60,7 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:textSize="16sp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textColor="#FFFFFF"
@@ -101,6 +102,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="Password"
+                android:textSize="16sp"
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#AAFFFFFF" />

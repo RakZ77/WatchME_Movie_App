@@ -8,6 +8,7 @@
 
     <!-- Dark gradient overlay -->
     <View
+        android:id="@+id/view3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/loading_screen"
@@ -21,7 +22,6 @@
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="272dp"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingHorizontal="32dp"
@@ -29,7 +29,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Welcome To text -->
         <TextView
@@ -49,9 +50,9 @@
             android:id="@+id/logoImage"
             android:layout_width="240dp"
             android:layout_height="70dp"
-            android:src="@drawable/app_logo"
+            android:layout_marginBottom="16dp"
             android:scaleType="fitCenter"
-            android:layout_marginBottom="16dp" />
+            android:src="@drawable/app_logo" />
 
         <!-- Subtitle -->
         <TextView
@@ -60,14 +61,14 @@
             android:layout_marginBottom="48dp"
             android:gravity="center"
             android:lineSpacingMultiplier="1.4"
-            android:text="The best movie streaming app\nwith ads free."
+            android:text="The best movie streaming app."
             android:textColor="#CCFFFFFF"
             android:textSize="16sp" />
 
         <!-- GET STARTED Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGetStarted"
-            android:layout_width="220dp"
+            android:layout_width="200dp"
             android:layout_height="52dp"
             android:backgroundTint="#E50914"
             android:letterSpacing="0.1"

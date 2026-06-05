@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFFFFF"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:text="Anonymous"/>
 
@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#7E838D"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:text="Just now"/>
             </LinearLayout>
         </LinearLayout>
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="#D0D0D0"
-            android:textSize="13sp"
+            android:textSize="12sp"
             android:lineSpacingExtra="3dp" />
 
     </LinearLayout>

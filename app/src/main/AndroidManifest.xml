@@ -16,17 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WatchMe"
         android:hardwareAccelerated="true">
-        <activity android:name=".views.LoadingActivity" android:exported="true">
+        <activity android:name=".views.LoadingActivity" android:exported="true" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".views.WelcomeActivity"/>
-        <activity android:name=".views.FirstActivity"/>
-        <activity android:name=".views.SignInActivity"/>
+        <activity android:name=".views.WelcomeActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.FirstActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.SignInActivity" android:screenOrientation="portrait"/>
         <activity android:name=".views.ResetPasswordActivity"
-            android:exported="true">
+            android:exported="true" android:screenOrientation="portrait">
 
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW"/>
@@ -38,16 +38,16 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".views.ForgotPasswordActivity"/>
-        <activity android:name=".views.SignUpActivity"/>
-        <activity android:name=".views.MainActivity"/>
-        <activity android:name=".views.SettingActivity"/>
-        <activity android:name=".views.AboutActivity"/>
-        <activity android:name=".views.HelpActivity"/>
-        <activity android:name=".views.MembershipActivity"/>
-        <activity android:name=".views.FeedbackActivity"/>
-        <activity android:name=".views.EditProfileActivity"/>
-        <activity android:name=".views.DetailsAboutMovieActivity"/>
-        <activity android:name=".views.VideoPlayerActivity"/>
+        <activity android:name=".views.ForgotPasswordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.SignUpActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.SettingActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.AboutActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.HelpActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.MembershipActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.FeedbackActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.EditProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.DetailsAboutMovieActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.VideoPlayerActivity" android:screenOrientation="portrait"/>
     </application>
 </manifest>

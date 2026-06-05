@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#242933"
+    android:fitsSystemWindows="true"
     tools:context=".views.HomeFragment">
     
     <FrameLayout
@@ -19,7 +20,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="52dp"
         android:background="@drawable/bottom_nav_bg"
         app:itemIconTint="@drawable/bottom_nav_colors"
         app:itemTextColor="@drawable/bottom_nav_colors"

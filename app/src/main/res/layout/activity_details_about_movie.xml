@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="#242933">
 
-    <ScrollView
-        android:layout_marginTop="?actionBarSize"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -23,12 +23,12 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="418dp">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/headerImage"
                     android:layout_width="0dp"
-                    android:layout_height="240dp"
+                    android:layout_height="200dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/default_poster"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -37,12 +37,14 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="240dp"
+                    android:layout_height="200dp"
                     android:background="#22000000"
                     app:layout_constraintBottom_toBottomOf="@id/headerImage"
                     app:layout_constraintEnd_toEndOf="@id/headerImage"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@id/headerImage"
-                    app:layout_constraintTop_toTopOf="@id/headerImage" />
+                    app:layout_constraintTop_toTopOf="@id/headerImage"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -71,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:text="Detail"
                         android:textColor="#F4F4F4"
-                        android:textSize="22sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         android:textAlignment="center"/>
 
@@ -88,10 +90,10 @@
 
                 <ImageView
                     android:id="@+id/playButton"
-                    android:layout_width="78dp"
-                    android:layout_height="78dp"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     android:background="@drawable/ic_ellipse"
-                    android:padding="24dp"
+                    android:padding="12dp"
                     android:src="@drawable/ic_play_buttom"
                     app:layout_constraintBottom_toBottomOf="@id/headerImage"
                     app:layout_constraintEnd_toEndOf="@id/headerImage"
@@ -104,7 +106,7 @@
                     android:layout_width="116dp"
                     android:layout_height="144dp"
                     android:layout_marginStart="24dp"
-                    android:translationY="-18dp"
+                    android:translationY="-28dp"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -126,9 +128,11 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="24dp"
                     android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/movieMetaRow"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/posterCard"
-                    app:layout_constraintTop_toTopOf="@id/posterCard">
+                    app:layout_constraintTop_toTopOf="@id/posterCard"
+                    app:layout_constraintVertical_bias="0.13999999">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -173,86 +177,100 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/posterCard"
+                    app:layout_constraintVertical_bias="0.0">
 
+                    <!-- Date -->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="3dp">
 
                         <ImageView
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:src="@drawable/ic_calendar"
+                            android:layout_marginEnd="3dp"
                             app:tint="#8A909B" />
 
                         <TextView
                             android:id="@+id/tvPublishDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:text=""
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:textColor="#8A909B"
-                            android:textSize="13sp" />
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="1dp"
                         android:layout_height="12dp"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginEnd="14dp"
                         android:background="#60656F" />
 
+                    <!-- Duration -->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="3dp">
 
                         <ImageView
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:src="@drawable/ic_clock"
+                            android:layout_marginEnd="3dp"
                             app:tint="#8A909B" />
 
                         <TextView
                             android:id="@+id/tvDuration"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             android:textColor="#8A909B"
-                            android:textSize="13sp" />
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="1dp"
                         android:layout_height="12dp"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginEnd="14dp"
                         android:background="#60656F" />
 
+                    <!-- Genre -->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="3dp">
 
                         <ImageView
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:src="@drawable/ic_ticket"
+                            android:layout_marginEnd="3dp"
                             app:tint="#8A909B" />
 
                         <TextView
                             android:id="@+id/tvGenre"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:textColor="#8A909B"
-                            android:textSize="13sp" />
+                            android:textSize="10sp" />
                     </LinearLayout>
+
                 </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.tabs.TabLayout
@@ -260,7 +278,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                app:tabGravity="center"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
                 app:tabIndicatorColor="#3A3F47"
                 app:tabTextColor="@color/white"
                 app:tabTextAppearance="@style/MyTabText">
@@ -289,6 +308,6 @@
 
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
