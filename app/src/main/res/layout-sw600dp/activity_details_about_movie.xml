@@ -28,7 +28,7 @@
                 <ImageView
                     android:id="@+id/headerImage"
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
+                    android:layout_height="250dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/default_poster"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
+                    android:layout_height="250dp"
                     android:background="#22000000"
                     app:layout_constraintBottom_toBottomOf="@id/headerImage"
                     app:layout_constraintEnd_toEndOf="@id/headerImage"
@@ -171,7 +171,7 @@
                     android:id="@+id/movieMetaRow"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginHorizontal="96dp"
                     android:layout_marginBottom="16dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -278,8 +278,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                app:tabMode="fixed"
-                app:tabGravity="fill"
+                app:tabMode="scrollable"
+                app:tabGravity="start"
                 android:minHeight="56dp"
                 app:tabIndicatorColor="#3A3F47"
                 app:tabTextColor="@color/white"

@@ -48,6 +48,7 @@
         <activity android:name=".views.FeedbackActivity" android:screenOrientation="portrait"/>
         <activity android:name=".views.EditProfileActivity" android:screenOrientation="portrait"/>
         <activity android:name=".views.DetailsAboutMovieActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".views.VideoPlayerActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".views.VideoPlayerActivity"
+                android:theme="@style/Theme.WatchMe.Fullscreen"/>
     </application>
 </manifest>
