@@ -49,7 +49,7 @@ public class SearchFragment extends Fragment {
         btnSearch = view.findViewById(R.id.btnSearch);
         viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         recyclerView = view.findViewById(R.id.all_movies_recyclerView);
-        int spanCount = getResources().getConfiguration().screenWidthDp / 120;
+        int spanCount = getResources().getConfiguration().screenWidthDp / 100;
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), spanCount));
         adapter = new SearchAdapter(searchAllList, this::navigateToDetails, viewModel, getViewLifecycleOwner());
         recyclerView.setAdapter(adapter);

@@ -42,7 +42,7 @@
 
         <!-- Username field -->
         <LinearLayout
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/sign_in_screen"
@@ -74,7 +74,7 @@
         <!-- Username error -->
         <TextView
             android:id="@+id/tvUsernameError"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="8dp"
@@ -84,7 +84,7 @@
 
         <!-- Email field -->
         <LinearLayout
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/sign_in_screen"
@@ -116,7 +116,7 @@
         <!-- Email error -->
         <TextView
             android:id="@+id/tvEmailError"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="8dp"
@@ -126,7 +126,7 @@
 
         <!-- Password field -->
         <LinearLayout
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/sign_in_screen"
@@ -168,7 +168,7 @@
         <!-- Password error -->
         <TextView
             android:id="@+id/tvPasswordError"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="8dp"
@@ -179,7 +179,7 @@
         <!-- SIGN UP Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSignUp"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"

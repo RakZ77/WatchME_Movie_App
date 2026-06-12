@@ -126,7 +126,7 @@ public class DetailsAboutMovieActivity extends AppCompatActivity {
                 intent.putExtra("movie_id", movieId);
                 startActivity(intent);
             } else {
-                Toast.makeText(this, "Trailer not available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Movie not available", Toast.LENGTH_SHORT).show();
             }
         });
 
