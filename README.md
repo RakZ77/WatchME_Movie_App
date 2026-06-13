@@ -167,6 +167,10 @@ implementation 'androidx.lifecycle:lifecycle-livedata:2.7.0'
 // ViewPager2
 implementation 'androidx.viewpager2:viewpager2:1.0.0'
 ```
+---
+
+## Our app looks
+<img width="2897" height="3016" alt="Night Mode Screens" src="https://github.com/user-attachments/assets/4c690ddd-6435-4cf9-9e2d-79c15f152dac" />
 
 ---
 
